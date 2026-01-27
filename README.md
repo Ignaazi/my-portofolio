@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 <img width="1440" height="724" alt="Screenshot 2026-01-27 at 22 01 10" src="https://github.com/user-attachments/assets/52b5553f-5cbc-4c17-b3c5-0e473dc361d6" />
 
-```bash<img width="1440" height="724" alt="Screenshot 2026-01-27 at 22 01 26" src="https://github.com/user-attachments/assets/bac35607-a12a-4570-a9c8-e045295f76dc" />
+<img width="1440" height="724" alt="Screenshot 2026-01-27 at 22 01 26" src="https://github.com/user-attachments/assets/bac35607-a12a-4570-a9c8-e045295f76dc" />
 
 npm run dev
 # or
