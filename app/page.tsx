@@ -18,13 +18,17 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+// Import AboutContent dari file about.tsx yang ada di level yang sama
+import AboutContent from "./about";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  // Tambahkan state untuk mengatur halaman mana yang aktif
+  const [activeTab, setActiveTab] = useState("Home");
 
   const menus = [
-    { name: 'Home', icon: <HomeIcon size={18} />, active: true },
+    { name: 'Home', icon: <HomeIcon size={18} /> },
     { name: 'About', icon: <User size={18} /> },
     { name: 'Project', icon: <Briefcase size={18} /> },
     { name: 'Blog', icon: <BookOpen size={18} /> },
@@ -112,7 +116,12 @@ export default function Home() {
         </div>
         <nav className="space-y-1 flex-1 overflow-y-auto">
           {menus.map((menu) => (
-            <div key={menu.name} className={`flex items-center gap-4 px-4 py-3 rounded-xl cursor-pointer transition-all ${menu.active ? 'bg-orange-600 text-white font-bold shadow-lg shadow-orange-600/20' : isDarkMode ? 'text-slate-400 hover:bg-white/5' : 'text-slate-500 hover:bg-slate-50'}`}>
+            <div 
+              key={menu.name} 
+              // Ganti halaman saat menu diklik
+              onClick={() => { setActiveTab(menu.name); setIsOpen(false); }}
+              className={`flex items-center gap-4 px-4 py-3 rounded-xl cursor-pointer transition-all ${activeTab === menu.name ? 'bg-orange-600 text-white font-bold shadow-lg shadow-orange-600/20' : isDarkMode ? 'text-slate-400 hover:bg-white/5' : 'text-slate-500 hover:bg-slate-50'}`}
+            >
               {menu.icon} <span className="text-sm">{menu.name}</span>
             </div>
           ))}
@@ -120,118 +129,127 @@ export default function Home() {
       </aside>
 
       {/* --- MAIN CONTENT --- */}
-      <main className="pt-24 px-6 lg:px-12 max-w-7xl mx-auto pb-20">
+      <main className="pt-24 px-6 lg:px-12 max-w-7xl mx-auto pb-10">
         
-        {/* Hero Card - POJOK LANCIP */}
-        <section className={`border p-8 md:p-12 mb-16 relative overflow-hidden group shadow-2xl transition-all duration-500 ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/50" : "bg-white border-slate-200"}`}>
-          <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-8">
-            <div className="flex-1">
-              <h1 className={`text-4xl md:text-6xl font-black tracking-tighter leading-none mb-4 transition-colors ${isDarkMode ? "text-white" : "text-slate-900"}`}>
-                Hi There 👋, <br />I'm <span className="text-orange-500 italic uppercase">AZI</span> 
-              </h1>
-              <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-8">Frontend Developer • Based in Indonesia</p>
-              <p className={`max-w-2xl leading-relaxed text-sm md:text-base mb-10 italic border-l-2 border-orange-500 pl-6 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                "I am a <span className={`font-bold not-italic underline decoration-orange-500 underline-offset-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Frontend Web Developer</span> who has a passion for Web Development."
-              </p>
-              <button className="flex items-center gap-3 bg-orange-600 px-8 py-4 rounded-2xl text-sm font-bold text-white hover:bg-orange-500 transition-all shadow-lg shadow-orange-900/40">
-                <Download size={18} /> Download CV
-              </button>
-            </div>
-            
-            <div className={`flex gap-4 p-3 border rounded-none ${isDarkMode ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-               <Linkedin size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
-               <Github size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
-               <Instagram size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
-            </div>
-          </div>
-        </section>
-
-        {/* --- SKILLS SECTION - TETAP TUMPUL --- */}
-        <section className="mb-20 overflow-hidden">
-          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mb-8 flex items-center gap-2 px-2">
-            <span className="text-orange-500">{"</>"}</span> Skills
-          </h2>
-          <div className="space-y-6">
-            <div className="relative flex overflow-x-hidden group">
-              <div className="animate-marquee flex gap-4 whitespace-nowrap py-2">
-                {skills.concat(skills).map((skill, i) => (
-                  <div key={i} className={`flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl min-w-max transition-all border ${isDarkMode ? "bg-white border-transparent" : "bg-white border-slate-100"}`}>
-                    <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={skill.name} className="w-6 h-6 object-contain" />
-                    <span className="text-slate-900 text-sm font-black tracking-tight">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative flex overflow-x-hidden group">
-              <div className="animate-marquee-reverse flex gap-4 whitespace-nowrap py-2">
-                {[...skills].reverse().concat([...skills].reverse()).map((skill, i) => (
-                  <div key={i} className={`flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl min-w-max transition-all border ${isDarkMode ? "bg-white border-transparent" : "bg-white border-slate-100"}`}>
-                    <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={skill.name} className="w-6 h-6 object-contain" />
-                    <span className="text-slate-900 text-sm font-black tracking-tight">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- HIRE ME SECTION - LANCIP --- */}
-        <section className={`border p-8 md:p-12 mb-16 relative overflow-hidden group shadow-2xl transition-all duration-500 ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/50" : "bg-white border-slate-200"}`}>
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-            <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
-              <h2 className={`text-3xl md:text-5xl font-black tracking-tighter leading-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>
-                I'm Ready To Be Hired For Your <span className="text-orange-500">Next Project.</span>
-              </h2>
-              <p className={`max-w-xl leading-relaxed text-sm md:text-base italic ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                I am an expert in Front End Development and Fullstack Web Developer, let's work together so that your project has good quality and good results.
-              </p>
-              
-              <div className="flex flex-col items-center lg:items-start py-2">
-                  <span className={`text-4xl font-black ${isDarkMode ? "text-white" : "text-slate-900"}`}>100+</span>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Projects Completed</span>
-              </div>
-
-              <div className="flex flex-row flex-wrap justify-center lg:justify-start gap-4 pt-2">
-                <button className={`flex items-center gap-2 px-6 py-4 rounded-2xl text-xs font-black transition-all shadow-xl border ${isDarkMode ? "bg-white text-slate-900 border-transparent" : "bg-white text-slate-900 border-slate-200"}`}>
-                  <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div> Hire Me!
-                </button>
-                <button className="flex items-center gap-2 bg-[#c32e2e] text-white px-6 py-4 rounded-2xl text-xs font-black hover:bg-[#a62525] transition-all shadow-xl">
-                  <Coffee size={16} /> Trakteer
-                </button>
-              </div>
-            </div>
-
-            <div className="relative w-full max-w-[320px] lg:max-w-[380px] aspect-square flex items-center justify-center mt-4 lg:mt-0">
-              <img 
-                src="https://cdni.iconscout.com/illustration/premium/thumb/web-development-2912011-2426090.png" 
-                alt="Working Illustration" 
-                className="w-full h-auto object-contain relative z-10"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Selected Projects - LANCIP */}
-        <section>
-          <h2 className={`text-4xl font-black mb-12 italic tracking-tighter uppercase transition-colors ${isDarkMode ? "text-white" : "text-slate-900"}`}>Selected Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, i) => (
-              <div key={i} className={`border p-4 rounded-2xl group hover:border-orange-500 transition-all duration-500 shadow-2xl ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/30" : "bg-white border-slate-200 shadow-lg"}`}>
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-800 mb-6 shadow-xl">
-                  <Image src={`https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600`} alt={project.title} fill className="object-cover opacity-50 group-hover:opacity-100 transition duration-700 group-hover:scale-110" />
+        {/* LOGIKA SWITCHER HALAMAN */}
+        {activeTab === "Home" ? (
+          <div className="animate-in fade-in duration-700">
+            {/* Hero Card */}
+            <section className={`border p-8 md:p-12 mb-16 relative overflow-hidden group shadow-2xl transition-all duration-500 ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/50" : "bg-white border-slate-200"}`}>
+              <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-8">
+                <div className="flex-1">
+                  <h1 className={`text-4xl md:text-6xl font-black tracking-tighter leading-none mb-4 transition-colors ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+                    Hi There 👋, I'm <span className="text-orange-500 ">Ignazi</span> 
+                  </h1>
+                  <p className="text-4xl font-black uppercase tracking-widest text-xs mb-8">Frontend Developer • Based in Indonesia</p>
+                  <p className={`max-w-2xl leading-relaxed text-sm md:text-base mb-10 italic border-l-2 border-orange-500 pl-6 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
+                    "I am a <span className={`font-bold not-italic underline decoration-orange-500 underline-offset-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Frontend Web Developer</span> who has a passion for Web Development."
+                  </p>
+                  <button className="flex items-center gap-3 bg-orange-600 px-8 py-4 rounded-2xl text-sm font-bold text-white hover:bg-orange-500 transition-all shadow-lg shadow-orange-900/40">
+                    <Download size={18} /> Download CV
+                  </button>
                 </div>
-                <h3 className={`text-2xl font-bold mb-3 group-hover:text-orange-500 transition-colors uppercase tracking-tighter ${isDarkMode ? "text-white" : "text-slate-900"}`}>{project.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-8 italic">{project.desc}</p>
-                <button className={`w-full py-4 border rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${isDarkMode ? "bg-white/5 border-white/10 hover:bg-orange-600 text-white" : "bg-slate-50 border-slate-200 hover:bg-orange-600 hover:text-white text-slate-600"}`}>
-                  View Project
-                </button>
+                
+                <div className={`flex gap-4 p-3 border rounded-none ${isDarkMode ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                   <Linkedin size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
+                   <Github size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
+                   <Instagram size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        <footer className={`mt-32 pt-16 border-t flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-widest italic text-center ${isDarkMode ? "border-white/5 text-slate-500" : "border-slate-200 text-slate-400"}`}>
-          <p>© 2026 Crafted by <span className="text-orange-500 font-bold not-italic uppercase">Aji Ignatius</span></p>
+            {/* --- SKILLS SECTION --- */}
+            <section className="mb-20 overflow-hidden">
+              <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mb-8 flex items-center gap-2 px-2">
+                <span className="text-orange-500">{"</>"}</span> Skills
+              </h2>
+              <div className="space-y-6">
+                <div className="relative flex overflow-x-hidden group">
+                  <div className="animate-marquee flex gap-4 whitespace-nowrap py-2">
+                    {skills.concat(skills).map((skill, i) => (
+                      <div key={i} className={`flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl min-w-max transition-all border ${isDarkMode ? "bg-white border-transparent" : "bg-white border-slate-100"}`}>
+                        <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={skill.name} className="w-6 h-6 object-contain" />
+                        <span className="text-slate-900 text-sm font-black tracking-tight">{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="relative flex overflow-x-hidden group">
+                  <div className="animate-marquee-reverse flex gap-4 whitespace-nowrap py-2">
+                    {[...skills].reverse().concat([...skills].reverse()).map((skill, i) => (
+                      <div key={i} className={`flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl min-w-max transition-all border ${isDarkMode ? "bg-white border-transparent" : "bg-white border-slate-100"}`}>
+                        <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={skill.name} className="w-6 h-6 object-contain" />
+                        <span className="text-slate-900 text-sm font-black tracking-tight">{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* --- HIRE ME SECTION --- */}
+            <section className={`border p-8 md:p-12 mb-16 relative overflow-hidden group shadow-2xl transition-all duration-500 ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/50" : "bg-white border-slate-200"}`}>
+              <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+                <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+                  <h2 className={`text-3xl md:text-5xl font-black tracking-tighter leading-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+                    I'm Ready To Be Hired For Your <span className="text-orange-500">Next Project.</span>
+                  </h2>
+                  <p className={`max-w-xl leading-relaxed text-sm md:text-base italic ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
+                    I am an expert in Front End Development and Fullstack Web Developer, let's work together so that your project has good quality and good results.
+                  </p>
+                  
+                  <div className="flex flex-row flex-wrap justify-center lg:justify-start gap-4 pt-2">
+                    <button className={`flex items-center gap-2 px-6 py-4 rounded-2xl text-xs font-black transition-all shadow-xl border ${isDarkMode ? "bg-white text-slate-900 border-transparent" : "bg-white text-slate-900 border-slate-200"}`}>
+                      <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div> Hire Me!
+                    </button>
+                    <button className="flex items-center gap-2 bg-[#c32e2e] text-white px-6 py-4 rounded-2xl text-xs font-black hover:bg-[#a62525] transition-all shadow-xl">
+                      <Coffee size={16} /> Trakteer
+                    </button>
+                  </div>
+                </div>
+
+                <div className="relative w-full max-w-[320px] lg:max-w-[380px] aspect-square flex items-center justify-center">
+                  <img 
+                    src="/assets/background.png" 
+                    alt="Working Illustration" 
+                    className="w-full h-auto object-contain relative z-10"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Selected Projects */}
+            <section>
+              <h2 className={`text-4xl font-black mb-12 italic tracking-tighter uppercase transition-colors ${isDarkMode ? "text-white" : "text-slate-900"}`}>Selected Projects</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {projects.map((project, i) => (
+                  <div key={i} className={`border p-4 rounded-none group hover:border-orange-500 transition-all duration-500 shadow-2xl ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/30" : "bg-white border-slate-200 shadow-lg"}`}>
+                    <div className="relative aspect-[16/10] rounded-none overflow-hidden bg-slate-800 mb-6 shadow-xl">
+                      <Image src={`https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600`} alt={project.title} fill className="object-cover opacity-50 group-hover:opacity-100 transition duration-700 group-hover:scale-110" />
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-3 group-hover:text-orange-500 transition-colors uppercase tracking-tighter ${isDarkMode ? "text-white" : "text-slate-900"}`}>{project.title}</h3>
+                    <p className="text-sm text-slate-400 leading-relaxed mb-8 italic">{project.desc}</p>
+                    <button className={`w-full py-4 border rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${isDarkMode ? "bg-white/5 border-white/10 hover:bg-orange-600 text-white" : "bg-slate-50 border-slate-200 hover:bg-orange-600 hover:text-white text-slate-600"}`}>
+                      View Project
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        ) : activeTab === "About" ? (
+          <AboutContent isDarkMode={isDarkMode} />
+        ) : (
+          <div className="flex items-center justify-center h-64 italic text-slate-500 uppercase font-black">
+            Under Development
+          </div>
+        )}
+
+        {/* --- FOOTER --- */}
+        <footer className={`mt-20 py-10 border-t flex justify-center items-center transition-colors duration-500 ${isDarkMode ? "border-white/5" : "border-slate-200"}`}>
+            <p className={`text-xs md:text-sm font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+              © 2026 Copyright By <span className="font-bold">AZDEV</span>
+            </p>
         </footer>
       </main>
 
