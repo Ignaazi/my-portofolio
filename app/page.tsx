@@ -18,8 +18,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-// Import AboutContent dari file about.tsx yang ada di level yang sama
+
+// Import Content dari file yang ada di level yang sama
 import AboutContent from "./about";
+import ContactContent from "./contact-content";
+import ProjectsContent from "./projects-content";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -239,6 +242,10 @@ export default function Home() {
           </div>
         ) : activeTab === "About" ? (
           <AboutContent isDarkMode={isDarkMode} />
+        ) : activeTab === "Project" ? (
+          <ProjectsContent isDarkMode={isDarkMode} />
+        ) : activeTab === "Contact" ? (
+          <ContactContent isDarkMode={isDarkMode} />
         ) : (
           <div className="flex items-center justify-center h-64 italic text-slate-500 uppercase font-black">
             Under Development
