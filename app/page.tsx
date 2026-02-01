@@ -18,6 +18,7 @@ import { useState } from "react";
 
 // Import Content dari file yang ada di level yang sama
 import AboutContent from "./about";
+import BlogContent from "./blog-content"; // Import Blog yang baru dibuat
 import ContactContent from "./contact-content";
 import ProjectsContent from "./projects-content";
 
@@ -314,6 +315,8 @@ export default function Home() {
           <AboutContent isDarkMode={isDarkMode} />
         ) : activeTab === "Project" ? (
           <ProjectsContent isDarkMode={isDarkMode} />
+        ) : activeTab === "Blog" ? (
+          <BlogContent isDarkMode={isDarkMode} />
         ) : activeTab === "Contact" ? (
           <ContactContent isDarkMode={isDarkMode} />
         ) : (
