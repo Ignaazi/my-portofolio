@@ -34,13 +34,21 @@ export default function ContactContent({ isDarkMode }: { isDarkMode: boolean }) 
   const handleSendWA = (e: React.FormEvent) => {
     e.preventDefault();
     const myNumber = "6282124256797"; 
+
+    // Mapping budget value ke label text untuk WhatsApp
+    const budgetDisplay = {
+      "< 2jt": "Rp.300.000 - Rp.1.000.000",
+      "2jt - 5jt": "Rp.1.000.000 - Rp.10.000.000",
+      "5jt+": "Rp.10jt++"
+    }[formData.budget] || formData.budget;
+
     const text = `*NEW PROJECT INQUIRY - AZDEV*%0A` +
                  `==========================%0A` +
                  `👤 *Client Name* : ${formData.name}%0A` +
                  `✉️ *Email* : ${formData.email}%0A` +
                  `📱 *WhatsApp* : ${formData.whatsapp}%0A` +
                  `📌 *Service* : ${formData.subject}%0A` +
-                 `💰 *Budget* : ${formData.budget}%0A` +
+                 `💰 *Budget* : ${budgetDisplay}%0A` +
                  `==========================%0A` +
                  `💬 *Message*:%0A${formData.message}%0A` +
                  `==========================%0A` +
@@ -88,7 +96,6 @@ export default function ContactContent({ isDarkMode }: { isDarkMode: boolean }) 
           {/* EMAIL CARD */}
           <div className={`group p-6 rounded-none border transition-all duration-500 ${isDarkMode ? "bg-white/[0.03] border-white/10" : "bg-white border-slate-200 shadow-sm"}`}>
             <div className="flex items-center gap-4">
-              {/* KOTAK ICON EMAIL YG DIUBAH */}
               <div className={`w-10 h-10 md:w-12 md:h-12 bg-white border rounded-none flex items-center justify-center shadow-lg transition-transform group-hover:rotate-6 shrink-0 ${isDarkMode ? "border-orange-500" : "border-black"}`}>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" className="w-6 h-6 object-contain" />
               </div>
@@ -156,7 +163,7 @@ export default function ContactContent({ isDarkMode }: { isDarkMode: boolean }) 
           <form onSubmit={handleSendWA} className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
             <div className="group relative">
               <label className="text-[10px] font-black uppercase text-orange-500 tracking-[0.3em] mb-3 block">Identity</label>
-              <input required className={`w-full bg-transparent border-b-2 py-2 outline-none transition-all font-bold text-base md:text-lg ${isDarkMode ? "border-white/10 focus:border-orange-500 text-white" : "border-slate-200 focus:border-orange-500 text-slate-900"}`} placeholder="Your Full Name" onChange={(e) => setFormData({...formData, name: e.target.value})}/>
+              <input required className={`w-full bg-transparent border-b-2 py-2 outline-none transition-all font-bold text-base md:text-lg ${isDarkMode ? "border-white/10 focus:border-orange-500 text-white" : "border-slate-200 focus:border-orange-500 text-slate-900"}`} placeholder="Your Name" onChange={(e) => setFormData({...formData, name: e.target.value})}/>
             </div>
 
             <div className="group relative">
@@ -171,11 +178,11 @@ export default function ContactContent({ isDarkMode }: { isDarkMode: boolean }) 
 
             <div className="group relative">
               <label className="text-[10px] font-black uppercase text-orange-500 tracking-[0.3em] mb-3 block">Budget Range</label>
-              <select className={`w-full bg-transparent border-b-2 py-2 outline-none transition-all font-bold text-base md:text-lg appearance-none cursor-pointer ${isDarkMode ? "border-white/10 focus:border-orange-500 text-white" : "border-slate-200 focus:border-orange-500 text-slate-900"}`} onChange={(e) => setFormData({...formData, budget: e.target.value})}>
+              <select required className={`w-full bg-transparent border-b-2 py-2 outline-none transition-all font-bold text-base md:text-lg appearance-none cursor-pointer ${isDarkMode ? "border-white/10 focus:border-orange-500 text-white" : "border-slate-200 focus:border-orange-500 text-slate-900"}`} onChange={(e) => setFormData({...formData, budget: e.target.value})}>
                 <option value="" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Select Budget</option>
-                <option value="< 2jt" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Under Rp 2M</option>
-                <option value="2jt - 5jt" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Rp 2M - 5M</option>
-                <option value="5jt+" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Rp 5M++</option>
+                <option value="< 2jt" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Rp.300.000 - Rp.1.000.000</option>
+                <option value="2jt - 5jt" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Rp.1.000.000 - Rp.10.000.000</option>
+                <option value="5jt+" className={isDarkMode ? "bg-[#0f172a]" : "bg-white"}>Rp.10jt++</option>
               </select>
             </div>
 
