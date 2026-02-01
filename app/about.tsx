@@ -52,15 +52,17 @@ export default function AboutContent({ isDarkMode }: { isDarkMode: boolean }) {
       {/* Header Section */}
       <section className="text-center mb-10">
         <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase mb-4">About Me</h1>
-        <p className="text-5xl md:text-6xl font-black uppercase tracking-widest text-[10px] md:text-xs">Journey, Education & Professional Experience</p>
-        <div className="w-300 h-1 bg-orange-500 mx-auto mt-6"></div>
+        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] md:text-xs">Journey, Education & Professional Experience</p>
+        <div className="w-24 h-1 bg-orange-500 mx-auto mt-6"></div>
       </section>
 
       {/* Narrative Section */}
       <section className={`p-2 md:p-4 mb-16 leading-relaxed italic transition-colors duration-500 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
         <div className="space-y-6 text-sm md:text-base font-medium text-center md:text-left">
           <p className="animate-in fade-in slide-in-from-left-4 duration-700 delay-150 border-l-4 border-orange-500 pl-4">
-            Hi! I am <span className="font-bold not-italic text-orange-500">Muhammad Ignazi</span>, I have experience working as an SMT Programmer, as for other experiences for Fullstack Web Developer the result of import (Kaizen) the aim of improving the previous system with a new system to help companies achieve maximum targets, currently I am studying at President University majoring in information systems with a study program enterprise resource planning (ERP). The purpose of making a portfolio about myself is that I want to help in terms of technology development to provide good benefits and make work easier, in the future I want to continue to learn and develop my potential so that I can continue to have a positive and useful impact on the surrounding community or help companies that want to grow in terms of developing company systems.
+            Hi! I am <span className="font-bold not-italic text-orange-500">Muhammad Ignazi</span>. I have a professional background as an SMT Programmer and extensive experience as a Fullstack Web Developer, specializing in system optimization (Kaizen). My work focuses on re-engineering legacy systems into modern, efficient solutions to help companies achieve maximum productivity. 
+            <br /><br />
+            Currently, I am pursuing my degree in Information Systems at President University, majoring in Enterprise Resource Planning (ERP). My mission is to bridge the gap between technology and practical utility, creating digital tools that simplify workflows and provide meaningful benefits. I am committed to continuous learning and strive to deliver a positive, useful impact for both the community and growing enterprises through innovative system development.
           </p>
         </div>
       </section>

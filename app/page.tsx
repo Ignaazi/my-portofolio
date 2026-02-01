@@ -110,18 +110,23 @@ export default function Home() {
       />
       
       <aside className={`fixed left-0 top-0 h-screen w-72 p-6 z-[120] transition-transform duration-500 flex flex-col ${isOpen ? "translate-x-0" : "-translate-x-full"} ${isDarkMode ? "bg-[#161d2f]" : "bg-white shadow-2xl"}`}>
-        <div className="flex justify-between items-center mb-8">
+        {/* HIDE MENU - POSISI TENGAH */}
+        <div className="flex justify-center items-center mb-8 relative">
             <span className="text-[10px] font-bold text-orange-500 tracking-[0.3em] uppercase italic">← Hide Menu</span>
-            <button onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-orange-500"><X size={20}/></button>
+            <button onClick={() => setIsOpen(false)} className="absolute right-0 text-slate-500 hover:text-orange-500"><X size={20}/></button>
         </div>
+
         <div className={`flex flex-col items-center mb-10 pb-6 border-b ${isDarkMode ? "border-white/5" : "border-slate-100"}`}>
           <div className="mb-4 h-20 w-20 rounded-full border-2 border-orange-500 p-1">
             <div className={`relative h-full w-full overflow-hidden rounded-full ${isDarkMode ? "bg-slate-800" : "bg-slate-100"}`}>
               <img src="/assets/aji.jpg" alt="Profile" className="h-full w-full object-cover" />
             </div>
           </div>
-          <h3 className={`text-sm font-bold text-center leading-tight uppercase ${isDarkMode ? "text-white" : "text-slate-900"}`}>MUHAMMAD IGNAZI <br/></h3>
+          <h3 className={`text-sm font-bold text-center leading-tight uppercase ${isDarkMode ? "text-white" : "text-slate-900"}`}>MUHAMMAD IGNAZI</h3>
+          {/* EMAIL DIBAWAH NAMA */}
+          <span className="text-[10px] text-slate-500 font-medium mt-1 lowercase">mhmmdignazi@gmail.com</span>
         </div>
+
         <nav className="space-y-1 flex-1 overflow-y-auto">
           {menus.map((menu) => (
             <div 
@@ -133,6 +138,26 @@ export default function Home() {
             </div>
           ))}
         </nav>
+
+        {/* --- BUTTON GMAIL SESUAI REFERENSI GAMBAR --- */}
+        <div className="mt-auto pt-6">
+          <a 
+            href="mailto:mhmmdignazi@gmail.com"
+            className="flex items-center gap-2 w-full p-1.5 bg-white text-slate-900 rounded-2xl shadow-xl hover:bg-sky-200 transition-all active:scale-95 border border-slate-200"
+          >
+            <div className="w-7 h-7 shrink-0">
+               <img 
+                 src="https://img.icons8.com/color/48/gmail-new.png" 
+                 alt="Gmail Logo" 
+                 className="w-full h-full object-contain"
+               />
+            </div>
+            <div className="flex flex-col items-start leading-tight overflow-hidden">
+              <span className="text-[11px] font-bold text-slate-600 truncate w-full">mhmmdignazi@gmail.com</span>
+              <span className="text-sm font-black text-slate-900 uppercase">Gmail</span>
+            </div>
+          </a>
+        </div>
       </aside>
 
       {/* --- MAIN CONTENT --- */}
