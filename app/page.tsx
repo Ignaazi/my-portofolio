@@ -5,10 +5,7 @@ import {
   Briefcase,
   Coffee,
   Download,
-  Github,
   Home as HomeIcon,
-  Instagram,
-  Linkedin,
   Mail,
   Menu,
   Moon,
@@ -27,7 +24,6 @@ import ProjectsContent from "./projects-content";
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  // Tambahkan state untuk mengatur halaman mana yang aktif
   const [activeTab, setActiveTab] = useState("Home");
 
   const menus = [
@@ -40,7 +36,7 @@ export default function Home() {
 
   const skills = [
     { name: "viteJs", slug: "vite" },
-    { name: "react", slug: "react" },
+    { name: "reactJs", slug: "react" },
     { name: "tailwind", slug: "tailwindcss" },
     { name: "nodeJs", slug: "nodedotjs" },
     { name: "javascript", slug: "javascript" },
@@ -55,6 +51,8 @@ export default function Home() {
     { name: "vuejs", slug: "vuedotjs" },
     { name: "postgresql", slug: "postgresql" },
     { name: "prisma", slug: "prisma" },
+    { name: "flutter", slug: "flutter" },
+    { name: "supabase", slug: "supabase" },
   ];
 
   const projects = [
@@ -77,7 +75,7 @@ export default function Home() {
           </button>
           
           <div className="flex flex-col leading-none">
-            <span className={`text-sm font-black tracking-tighter uppercase ${isDarkMode ? "text-white" : "text-slate-900"}`}>AZDEV ®</span>
+            <span className={`text-sm font-black tracking-tighter uppercase ${isDarkMode ? "text-white" : "text-slate-900"}`}>AJITECH ®</span>
             <span className="text-[10px] text-slate-400 font-medium truncate max-w-[150px] md:max-w-none uppercase">
               mhmmdignazi@gmail.com 
             </span>
@@ -85,11 +83,18 @@ export default function Home() {
         </div>
 
         <div className="flex items-center gap-4">
-          <button 
+          <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className={`p-2 transition-colors rounded-full ${isDarkMode ? "text-slate-400 hover:text-orange-500 hover:bg-white/5" : "text-slate-500 hover:text-orange-600 hover:bg-slate-100"}`}
+            className={`p-2 rounded-lg transition-colors border flex items-center justify-center
+              ${isDarkMode 
+                ? "hover:bg-white/5 border-white/10" 
+                : "hover:bg-slate-100 border-slate-200"}`}
           >
-            {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
+            {isDarkMode ? (
+              <Sun size={24} className="text-orange-500" />
+            ) : (
+              <Moon size={24} className="text-orange-500" />
+            )}
           </button>
 
           <div className="h-9 w-9 rounded-full bg-orange-600/20 border border-orange-500/50 hidden md:flex items-center justify-center overflow-hidden">
@@ -121,7 +126,6 @@ export default function Home() {
           {menus.map((menu) => (
             <div 
               key={menu.name} 
-              // Ganti halaman saat menu diklik
               onClick={() => { setActiveTab(menu.name); setIsOpen(false); }}
               className={`flex items-center gap-4 px-4 py-3 rounded-xl cursor-pointer transition-all ${activeTab === menu.name ? 'bg-orange-600 text-white font-bold shadow-lg shadow-orange-600/20' : isDarkMode ? 'text-slate-400 hover:bg-white/5' : 'text-slate-500 hover:bg-slate-50'}`}
             >
@@ -134,7 +138,6 @@ export default function Home() {
       {/* --- MAIN CONTENT --- */}
       <main className="pt-24 px-6 lg:px-12 max-w-7xl mx-auto pb-10">
         
-        {/* LOGIKA SWITCHER HALAMAN */}
         {activeTab === "Home" ? (
           <div className="animate-in fade-in duration-700">
             {/* Hero Card */}
@@ -144,26 +147,59 @@ export default function Home() {
                   <h1 className={`text-4xl md:text-6xl font-black tracking-tighter leading-none mb-4 transition-colors ${isDarkMode ? "text-white" : "text-slate-900"}`}>
                     Hi There 👋, I'm <span className="text-orange-500 ">Ignazi</span> 
                   </h1>
-                  <p className="text-4xl font-black uppercase tracking-widest text-xs mb-8">Frontend Developer • Based in Indonesia</p>
-                  <p className={`max-w-2xl leading-relaxed text-sm md:text-base mb-10 italic border-l-2 border-orange-500 pl-6 ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>
-                    "I am a <span className={`font-bold not-italic underline decoration-orange-500 underline-offset-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Frontend Web Developer</span> who has a passion for Web Development."
+                  <p className="text-4xl font-black uppercase tracking-widest text-xs mb-8">Fullstack Web Developer • Based in Indonesia</p>
+                  <p className={`max-w-2xl font-bold leading-relaxed text-sm md:text-base mb-10  border-l-2 border-orange-500 pl-6 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+                    "I am a <span className={`font-bold not-italic underline decoration-orange-500 underline-offset-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Fullstack Web Developer</span> who has a passion for Technology Development."
                   </p>
                   <button className="flex items-center gap-3 bg-orange-600 px-8 py-4 rounded-2xl text-sm font-bold text-white hover:bg-orange-500 transition-all shadow-lg shadow-orange-900/40">
                     <Download size={18} /> Download CV
                   </button>
                 </div>
                 
-                <div className={`flex gap-4 p-3 border rounded-none ${isDarkMode ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                   <Linkedin size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
-                   <Github size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
-                   <Instagram size={20} className="hover:text-orange-500 cursor-pointer transition-colors text-slate-400" />
-                </div>
+            {/* --- SOSIAL MEDIA (FLAT & CLEAN) --- */}
+<div className="flex gap-6 items-center">
+   {/* LINKEDIN */}
+   <a href="https://linkedin.com/in/muhammad-ignazi" target="_blank" rel="noopener noreferrer" className="hover:scale-125 transition-transform">
+      <img 
+        src="https://img.icons8.com/fluency/48/000000/linkedin.png" 
+        alt="LinkedIn" 
+        className="w-10 h-10" 
+      />
+   </a>
+   
+   {/* GITHUB */}
+   <a href="https://github.com/ignaazi" target="_blank" rel="noopener noreferrer" className={`hover:scale-125 transition-transform ${isDarkMode ? "invert" : ""}`}>
+      <img 
+        src="https://img.icons8.com/ios-filled/50/000000/github.png" 
+        alt="GitHub" 
+        className="w-10 h-10" 
+      />
+   </a>
+   
+   {/* INSTAGRAM */}
+   <a href="https://instagram.com/ignaazi" target="_blank" rel="noopener noreferrer" className="hover:scale-125 transition-transform">
+      <img 
+        src="https://img.icons8.com/fluency/48/000000/instagram-new.png" 
+        alt="Instagram" 
+        className="w-10 h-10" 
+      />
+   </a>
+   
+   {/* TIKTOK */}
+   <a href="https://tiktok.com/@ignaazi" target="_blank" rel="noopener noreferrer" className={`hover:scale-125 transition-transform ${isDarkMode ? "invert" : ""}`}>
+      <img 
+        src="https://img.icons8.com/ios-filled/50/000000/tiktok.png" 
+        alt="TikTok" 
+        className="w-10 h-10" 
+      />
+   </a>
+</div>
               </div>
             </section>
 
             {/* --- SKILLS SECTION --- */}
             <section className="mb-20 overflow-hidden">
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mb-8 flex items-center gap-2 px-2">
+              <h2 className={`text-2xl font-bold uppercase tracking-[0.2em] mb-8 flex items-center gap-2 px-2 transition-colors duration-500 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
                 <span className="text-orange-500">{"</>"}</span> Skills
               </h2>
               <div className="space-y-6">
@@ -202,9 +238,16 @@ export default function Home() {
                   </p>
                   
                   <div className="flex flex-row flex-wrap justify-center lg:justify-start gap-4 pt-2">
-                    <button className={`flex items-center gap-2 px-6 py-4 rounded-2xl text-xs font-black transition-all shadow-xl border ${isDarkMode ? "bg-white text-slate-900 border-transparent" : "bg-white text-slate-900 border-slate-200"}`}>
+                    {/* BUTTON HIRE ME DENGAN LINK WHATSAPP */}
+                    <a 
+                      href="https://wa.me/6282124256797?text=Halo%20Ignazi,%20saya%20tertarik%20untuk%20bekerja%20sama%20dengan%20Anda%20di%20project%20berikutnya." 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-2 px-6 py-4 rounded-2xl text-xs font-black transition-all shadow-xl border ${isDarkMode ? "bg-white text-slate-900 border-transparent hover:bg-slate-100" : "bg-white text-slate-900 border-slate-200 hover:bg-slate-50"}`}
+                    >
                       <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div> Hire Me!
-                    </button>
+                    </a>
+                    
                     <button className="flex items-center gap-2 bg-[#c32e2e] text-white px-6 py-4 rounded-2xl text-xs font-black hover:bg-[#a62525] transition-all shadow-xl">
                       <Coffee size={16} /> Trakteer
                     </button>
@@ -221,9 +264,11 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Selected Projects */}
+            {/* Best Projects */}
             <section>
-              <h2 className={`text-4xl font-black mb-12 italic tracking-tighter uppercase transition-colors ${isDarkMode ? "text-white" : "text-slate-900"}`}>Selected Projects</h2>
+              <h2 className={`text-2xl font-bold uppercase tracking-[0.2em] mb-12 flex items-center gap-2 px-2 transition-colors duration-500 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+                <Briefcase className="text-orange-500" size={28} /> Best Projects
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projects.map((project, i) => (
                   <div key={i} className={`border p-4 rounded-none group hover:border-orange-500 transition-all duration-500 shadow-2xl ${isDarkMode ? "bg-[#161d2f] border-white/5 shadow-black/30" : "bg-white border-slate-200 shadow-lg"}`}>
@@ -255,7 +300,7 @@ export default function Home() {
         {/* --- FOOTER --- */}
         <footer className={`mt-20 py-10 border-t flex justify-center items-center transition-colors duration-500 ${isDarkMode ? "border-white/5" : "border-slate-200"}`}>
             <p className={`text-xs md:text-sm font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
-              © 2026 Copyright By <span className="font-bold">AZDEV</span>
+              © 2026 Copyright By <span className="font-bold">AJITECH</span>
             </p>
         </footer>
       </main>
