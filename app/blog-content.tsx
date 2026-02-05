@@ -23,12 +23,11 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-// --- KOMPONEN DETAIL VIEW (LINEAR LAYOUT: BACK -> JUDUL -> GAMBAR -> TEXT) ---
+// --- KOMPONEN DETAIL VIEW ---
 const DetailView = ({ post, onBack, isDarkMode }: any) => {
-  // Warna tag yang lebih variatif namun tetap soft
   const tags = [
     { name: "#AssysGroup", bg: "bg-orange-100 text-orange-600", dark: "bg-orange-900/30 text-orange-400" },
-    { name: "#LaserMachine", bg: "bg-blue-100 text-blue-600", dark: "bg-blue-900/30 text-blue-400" },
+    { name: "#LaserMarking", bg: "bg-blue-100 text-blue-600", dark: "bg-blue-900/30 text-blue-400" },
     { name: "#TechnicalTraining", bg: "bg-emerald-100 text-emerald-600", dark: "bg-emerald-900/30 text-emerald-400" },
     { name: "#IndustrialGrade", bg: "bg-purple-100 text-purple-600", dark: "bg-purple-900/30 text-purple-400" },
   ];
@@ -40,7 +39,6 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
       exit={{ opacity: 0 }} 
       className="max-w-3xl mx-auto py-10 px-4 md:px-0"
     >
-      {/* 1. Button Back */}
       <button 
         onClick={onBack} 
         className={`flex items-center gap-2 px-5 py-2 rounded-full font-bold text-xs uppercase tracking-widest transition-all mb-8 border ${
@@ -52,12 +50,11 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
         <ArrowLeft size={16} /> Back
       </button>
 
-      {/* 2. Judul Section */}
       <header className="mb-8">
         <h1 className={`text-3xl md:text-4xl font-black leading-tight mb-4 tracking-tight uppercase italic ${
           isDarkMode ? 'text-white' : 'text-slate-900'
         }`}>
-          Training Laser Machine <span className="text-orange-600">from Assys Group</span>
+          Training Laser Marking <span className="text-orange-600">from Assys Group</span>
         </h1>
         <div className={`flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider opacity-60 pb-6 border-b border-dashed ${isDarkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           <span className="flex items-center gap-1.5"><Terminal size={14} className="text-orange-600"/> {post.module}</span>
@@ -66,18 +63,20 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
         </div>
       </header>
 
-      {/* 3. Gambar (Tengah & Proporsional) */}
+      {/* --- BAGIAN FOTO ABANG --- */}
       <div className="flex justify-center mb-10">
         <div className={`w-full max-w-2xl rounded-[3rem] overflow-hidden border-4 shadow-2xl ${isDarkMode ? 'border-slate-800' : 'border-slate-100'}`}>
           <img 
-            src="/foto-laser-abang.jpg" 
+            src="/assets/blog2.png" // <-- GANTI NAMA FILE DISINI SESUAI FOTO ABANG DI FOLDER PUBLIC
             className="w-full h-auto object-cover" 
-            alt="Training Laser Machine" 
+            alt="Training Laser Marking Assys Group" 
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://picsum.photos/seed/assys/1200/630"; // Fallback jika foto tidak ketemu
+            }}
           />
         </div>
       </div>
 
-      {/* 4. Artikel Tulisan Biasa */}
       <article className={`space-y-6 text-[17px] leading-relaxed mb-12 ${
         isDarkMode ? 'text-slate-300' : 'text-slate-600'
       }`}>
@@ -85,29 +84,23 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
           "Assys Group berkomitmen memberikan edukasi teknis terbaik untuk memaksimalkan penggunaan mesin laser industri."
         </p>
         <p>
-          Training mesin laser dari Assys Group dirancang untuk memberikan pemahaman mendalam bagi para operator dan teknisi. 
-          Dalam sesi ini, peserta mempelajari berbagai aspek penting, mulai dari dasar-dasar pengoperasian, optimasi parameter pemotongan, 
-          hingga prosedur perawatan rutin (maintenance) agar mesin tetap dalam kondisi prima.
+          Sesi Training Laser Marking ini fokus pada peningkatan skill operasional dalam menciptakan marking yang presisi dan permanen pada berbagai material. 
+          Peserta dibekali pengetahuan mendalam mengenai manajemen daya laser, kecepatan grafir, hingga perawatan lensa optik.
         </p>
         <div className={`p-8 rounded-[2rem] border-2 border-dashed ${isDarkMode ? "border-white/10 bg-white/5" : "border-slate-200 bg-slate-50"}`}>
           <h3 className={`text-xl font-black uppercase italic mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
             Materi Pelatihan:
           </h3>
           <ul className="list-disc list-inside space-y-3 font-medium text-sm">
-            <li>Pengenalan Komponen Utama Mesin Laser</li>
-            <li>Setting Parameter Material & Power</li>
-            <li>Software Integration (CAD/CAM)</li>
-            <li>Keamanan Kerja & Prosedur Emergency</li>
-            <li>Troubleshooting Dasar & Maintenance</li>
+            <li>Optimalisasi Parameter Marking (Speed & Power)</li>
+            <li>Software Calibration & EzCad Setup</li>
+            <li>Perawatan Rutin & Pembersihan Lensa</li>
+            <li>Programing Laser</li>
+            <li>Troubleshooting Hasil Marking Kurang Tajam</li>
           </ul>
         </div>
-        <p>
-          Dengan mengikuti pelatihan ini, diharapkan perusahaan dapat meningkatkan efisiensi produksi dan meminimalisir risiko 
-          kesalahan pengoperasian yang dapat merusak material maupun komponen mesin yang mahal.
-        </p>
-        <p className="italic opacity-70">"Kualitas operasional adalah investasi jangka panjang bagi setiap industri."</p>
+        <p className="italic opacity-70">"Efisiensi produksi dimulai dari operator yang terlatih dengan baik."</p>
 
-        {/* 5. Hashtag Section */}
         <div className="pt-8 border-t border-slate-500/10">
           <p className={`text-xs font-black uppercase tracking-widest mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Kategori Tag:</p>
           <div className="flex flex-wrap gap-2">
@@ -138,16 +131,13 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
   const [activePostId, setActivePostId] = useState<number | null>(null);
   const [commentInput, setCommentInput] = useState("");
   const [replyTarget, setReplyTarget] = useState<any>(null);
-
-  // State untuk Detail Blog
   const [selectedPost, setSelectedPost] = useState<any>(null);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
 
   const allPosts = [
-    { id: 1, title: "Training Laser Machine", module: "ASSYS #1", date: "FEB 2026" },
+    { id: 1, title: "Training Laser Marking", module: "ASSYS #1", date: "FEB 2026" },
     { id: 2, title: "Laser Cutting Optimization", module: "ASSYS #2", date: "FEB 2026" },
     { id: 3, title: "Maintenance System", module: "ASSYS #3", date: "FEB 2026" },
     { id: 4, title: "Safety Protocol", module: "ASSYS #4", date: "MAR 2026" },
@@ -181,25 +171,21 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
     if (lData) setLikes(lData);
 
     const scoreMap = new Map<string, number>();
-
     cData?.forEach(c => {
       const name = (c.user_name || "Anonymous").trim().toUpperCase();
       const points = (c.parent_id ? 15 : 10) + ((c.likes_count || 0) * 5);
       scoreMap.set(name, (scoreMap.get(name) || 0) + points);
     });
-
     lData?.forEach(l => { 
       if (l.user_name) {
         const name = l.user_name.trim().toUpperCase();
         scoreMap.set(name, (scoreMap.get(name) || 0) + 2);
       }
     });
-
     const sorted = Array.from(scoreMap.entries())
         .map(([name, points]) => ({ name, points }))
         .sort((a, b) => b.points - a.points)
         .slice(0, 5);
-
     setLeaderboard(sorted);
   };
 
@@ -236,13 +222,12 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
 
   return (
     <div className={`max-w-7xl mx-auto px-4 py-12 transition-all duration-500 ${isDarkMode ? 'bg-[#020617] text-slate-100' : 'bg-[#f8fafc] text-slate-900'}`}>
-      
       <AnimatePresence mode="wait">
         {!selectedPost ? (
           <motion.div key="main-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <header className="mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <motion.h2 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter">
-                Assys <span className="text-orange-600">Group.</span>
+                MY <span className="text-orange-600">BLOG.</span>
               </motion.h2>
 
               <div className="relative group w-full md:w-80">
@@ -452,7 +437,6 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
             </div>
           </motion.div>
         ) : (
-          /* --- DETAIL VIEW --- */
           <DetailView 
             post={selectedPost} 
             onBack={() => setSelectedPost(null)} 
