@@ -27,10 +27,10 @@ import { useEffect, useMemo, useState } from "react";
 const DetailView = ({ post, onBack, isDarkMode }: any) => {
   // Warna tag yang lebih variatif namun tetap soft
   const tags = [
-    { name: "#nextjs", bg: "bg-pink-100 text-pink-600", dark: "bg-pink-900/30 text-pink-400" },
-    { name: "#typescript", bg: "bg-blue-100 text-blue-600", dark: "bg-blue-900/30 text-blue-400" },
-    { name: "#supabase", bg: "bg-emerald-100 text-emerald-600", dark: "bg-emerald-900/30 text-emerald-400" },
-    { name: "#fullstack", bg: "bg-purple-100 text-purple-600", dark: "bg-purple-900/30 text-purple-400" },
+    { name: "#AssysGroup", bg: "bg-orange-100 text-orange-600", dark: "bg-orange-900/30 text-orange-400" },
+    { name: "#LaserMachine", bg: "bg-blue-100 text-blue-600", dark: "bg-blue-900/30 text-blue-400" },
+    { name: "#TechnicalTraining", bg: "bg-emerald-100 text-emerald-600", dark: "bg-emerald-900/30 text-emerald-400" },
+    { name: "#IndustrialGrade", bg: "bg-purple-100 text-purple-600", dark: "bg-purple-900/30 text-purple-400" },
   ];
 
   return (
@@ -54,10 +54,10 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
 
       {/* 2. Judul Section */}
       <header className="mb-8">
-        <h1 className={`text-3xl md:text-4xl font-black leading-tight mb-4 tracking-tight ${
+        <h1 className={`text-3xl md:text-4xl font-black leading-tight mb-4 tracking-tight uppercase italic ${
           isDarkMode ? 'text-white' : 'text-slate-900'
         }`}>
-          {post.title}: Solusi Lengkap Modern dengan {post.module}
+          Training Laser Machine <span className="text-orange-600">from Assys Group</span>
         </h1>
         <div className={`flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider opacity-60 pb-6 border-b border-dashed ${isDarkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           <span className="flex items-center gap-1.5"><Terminal size={14} className="text-orange-600"/> {post.module}</span>
@@ -68,11 +68,11 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
 
       {/* 3. Gambar (Tengah & Proporsional) */}
       <div className="flex justify-center mb-10">
-        <div className={`w-full max-w-2xl rounded-3xl overflow-hidden border-4 shadow-2xl ${isDarkMode ? 'border-slate-800' : 'border-slate-100'}`}>
+        <div className={`w-full max-w-2xl rounded-[3rem] overflow-hidden border-4 shadow-2xl ${isDarkMode ? 'border-slate-800' : 'border-slate-100'}`}>
           <img 
-            src={`https://picsum.photos/seed/rel${post.id}/1200/630`} 
+            src="/foto-laser-abang.jpg" 
             className="w-full h-auto object-cover" 
-            alt="Article Header" 
+            alt="Training Laser Machine" 
           />
         </div>
       </div>
@@ -81,18 +81,31 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
       <article className={`space-y-6 text-[17px] leading-relaxed mb-12 ${
         isDarkMode ? 'text-slate-300' : 'text-slate-600'
       }`}>
-        <p className="font-semibold text-xl text-orange-600">
-          Membangun Masa Depan Digital 🚀
+        <p className="font-bold text-xl text-orange-600 italic">
+          "Assys Group berkomitmen memberikan edukasi teknis terbaik untuk memaksimalkan penggunaan mesin laser industri."
         </p>
         <p>
-          Platform ini dirancang untuk memberikan pengalaman pengguna yang mulus dan efisien. 
-          Dengan menggunakan teknologi terbaru, sistem ini memastikan performa yang cepat dan keamanan data yang terjamin.
+          Training mesin laser dari Assys Group dirancang untuk memberikan pemahaman mendalam bagi para operator dan teknisi. 
+          Dalam sesi ini, peserta mempelajari berbagai aspek penting, mulai dari dasar-dasar pengoperasian, optimasi parameter pemotongan, 
+          hingga prosedur perawatan rutin (maintenance) agar mesin tetap dalam kondisi prima.
         </p>
+        <div className={`p-8 rounded-[2rem] border-2 border-dashed ${isDarkMode ? "border-white/10 bg-white/5" : "border-slate-200 bg-slate-50"}`}>
+          <h3 className={`text-xl font-black uppercase italic mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+            Materi Pelatihan:
+          </h3>
+          <ul className="list-disc list-inside space-y-3 font-medium text-sm">
+            <li>Pengenalan Komponen Utama Mesin Laser</li>
+            <li>Setting Parameter Material & Power</li>
+            <li>Software Integration (CAD/CAM)</li>
+            <li>Keamanan Kerja & Prosedur Emergency</li>
+            <li>Troubleshooting Dasar & Maintenance</li>
+          </ul>
+        </div>
         <p>
-          Tidak perlu memulai dari nol. Kode yang kami sediakan sudah teruji secara modular, 
-          memungkinkan Anda untuk melakukan kustomisasi sesuai kebutuhan bisnis atau proyek personal Anda tanpa hambatan teknis yang berarti.
+          Dengan mengikuti pelatihan ini, diharapkan perusahaan dapat meningkatkan efisiensi produksi dan meminimalisir risiko 
+          kesalahan pengoperasian yang dapat merusak material maupun komponen mesin yang mahal.
         </p>
-        <p className="italic opacity-70">"Kualitas kode adalah investasi jangka panjang bagi setiap pengembang."</p>
+        <p className="italic opacity-70">"Kualitas operasional adalah investasi jangka panjang bagi setiap industri."</p>
 
         {/* 5. Hashtag Section */}
         <div className="pt-8 border-t border-slate-500/10">
@@ -134,11 +147,11 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
   const postsPerPage = 3;
 
   const allPosts = [
-    { id: 1, title: "Supabase Ecosystem", module: "NODE #1", date: "FEB 2026" },
-    { id: 2, title: "Next.js Speed", module: "NODE #2", date: "FEB 2026" },
-    { id: 3, title: "Tailwind Scale", module: "NODE #3", date: "FEB 2026" },
-    { id: 4, title: "Advanced React", module: "NODE #4", date: "MAR 2026" },
-    { id: 5, title: "Framer Motion 101", module: "NODE #5", date: "MAR 2026" },
+    { id: 1, title: "Training Laser Machine", module: "ASSYS #1", date: "FEB 2026" },
+    { id: 2, title: "Laser Cutting Optimization", module: "ASSYS #2", date: "FEB 2026" },
+    { id: 3, title: "Maintenance System", module: "ASSYS #3", date: "FEB 2026" },
+    { id: 4, title: "Safety Protocol", module: "ASSYS #4", date: "MAR 2026" },
+    { id: 5, title: "Precision Engineering", module: "ASSYS #5", date: "MAR 2026" },
   ];
 
   const filteredPosts = useMemo(() => {
@@ -229,7 +242,7 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
           <motion.div key="main-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <header className="mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <motion.h2 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter">
-                Activity <span className="text-orange-600">Log.</span>
+                Assys <span className="text-orange-600">Group.</span>
               </motion.h2>
 
               <div className="relative group w-full md:w-80">
@@ -255,8 +268,8 @@ export default function BlogContent({ isDarkMode }: { isDarkMode: boolean }) {
                       ? "bg-slate-900/80 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]" 
                       : "bg-white border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.04)]"
                     }`}>
-                      <div className="w-full md:w-40 h-40 shrink-0 overflow-hidden rounded-3xl bg-slate-800 shadow-xl">
-                        <img src={`https://picsum.photos/seed/rel${post.id}/400/400`} className="w-full h-full object-cover opacity-90" alt="" />
+                      <div onClick={() => setSelectedPost(post)} className="w-full md:w-40 h-40 shrink-0 overflow-hidden rounded-3xl bg-slate-800 shadow-xl cursor-pointer">
+                        <img src={`https://picsum.photos/seed/assys${post.id}/400/400`} className="w-full h-full object-cover opacity-90 transition-transform hover:scale-110" alt="" />
                       </div>
                       <div className="flex-1 flex flex-col justify-between py-1">
                         <div>
