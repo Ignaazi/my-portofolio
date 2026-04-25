@@ -19,10 +19,10 @@ import { useState } from "react";
  // --- FUNGSI DOWNLOAD CV ---
   const handleDownloadCV = () => {
     // Pastikan file PDF ada di folder public/assets/
-    const cvUrl = "/assets/CV-Muhammad ignazi.pdf"; 
+    const cvUrl = "/assets/cv_muhammad_ignazi.pdf"; 
     const link = document.createElement("a");
     link.href = cvUrl;
-    link.download = "CV_Muhammad_Ignazi.pdf"; // Nama file saat didownload
+    link.download = "cv_muhammad_ignazi.pdf"; // Nama file saat didownload
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -192,7 +192,7 @@ export default function Home() {
                   onClick={handleDownloadCV}
                   className="flex items-center gap-3 bg-orange-600 px-8 py-4 rounded-2xl text-sm font-bold text-white hover:bg-orange-500 transition-all shadow-lg shadow-orange-900/40 active:scale-95">
                   <Download size={18} /> Download CV
-</button>
+                  </button>
                 </div>
                 
             {/* --- SOSIAL MEDIA (FLAT & CLEAN) --- */}
