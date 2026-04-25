@@ -3,33 +3,33 @@
 import { supabase } from "@/lib/supabase";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-    ArrowLeft,
-    Award,
-    ChevronLeft,
-    ChevronRight,
-    Clock,
-    Copy,
-    Heart,
-    Medal,
-    MessageCircle,
-    Search,
-    Send,
-    Tag as TagIcon,
-    Terminal,
-    TrendingUp,
-    Trophy,
-    UserCircle,
-    Wallet
+  ArrowLeft,
+  Award,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Copy,
+  Heart,
+  Medal,
+  MessageCircle,
+  Search,
+  Send,
+  Tag as TagIcon,
+  Terminal,
+  TrendingUp,
+  Trophy,
+  UserCircle,
+  Wallet
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 // --- KOMPONEN DETAIL VIEW ---
 const DetailView = ({ post, onBack, isDarkMode }: any) => {
   const tags = [
-    { name: "#AssysGroup", bg: "bg-orange-100 text-orange-600", dark: "bg-orange-900/30 text-orange-400" },
-    { name: "#LaserMarking", bg: "bg-blue-100 text-blue-600", dark: "bg-blue-900/30 text-blue-400" },
-    { name: "#TechnicalTraining", bg: "bg-emerald-100 text-emerald-600", dark: "bg-emerald-900/30 text-emerald-400" },
-    { name: "#IndustrialGrade", bg: "bg-purple-100 text-purple-600", dark: "bg-purple-900/30 text-purple-400" },
+    { name: "#Asys Group", bg: "bg-orange-100 text-orange-600", dark: "bg-orange-900/30 text-orange-400" },
+    { name: "#Laser Marking", bg: "bg-blue-100 text-blue-600", dark: "bg-blue-900/30 text-blue-400" },
+    { name: "#Technical Training", bg: "bg-emerald-100 text-emerald-600", dark: "bg-emerald-900/30 text-emerald-400" },
+    { name: "#Industrial SMT", bg: "bg-purple-100 text-purple-600", dark: "bg-purple-900/30 text-purple-400" },
   ];
 
   return (
@@ -54,7 +54,7 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
         <h1 className={`text-3xl md:text-4xl font-black leading-tight mb-4 tracking-tight uppercase italic ${
           isDarkMode ? 'text-white' : 'text-slate-900'
         }`}>
-          Training Laser Marking <span className="text-orange-600">from Assys Group</span>
+          Training Laser Marking <span className="text-orange-600">from Asys Group</span>
         </h1>
         <div className={`flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider opacity-60 pb-6 border-b border-dashed ${isDarkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           <span className="flex items-center gap-1.5"><Terminal size={14} className="text-orange-600"/> {post.module}</span>
@@ -81,10 +81,10 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
         isDarkMode ? 'text-slate-300' : 'text-slate-600'
       }`}>
         <p className="font-bold text-xl text-orange-600 italic">
-          "Assys Group berkomitmen memberikan edukasi teknis terbaik untuk memaksimalkan penggunaan mesin laser industri."
+          "Asys Group Bekerja sama dengan PT SIIX EMS Karawang dalam configurasi LINE SMT terutama pada mesin laser untuk PCBA SMT Manufacturing."
         </p>
         <p>
-          Sesi Training Laser Marking ini fokus pada peningkatan skill operasional dalam menciptakan marking yang presisi dan permanen pada berbagai material. 
+          Sesi Training Laser Marking ini dengan team dari asys group MR Peejay selaku service engineer membantu team engineering PT SIIX EMS Karawang untuk melatih agar bisa mengoprasikan mesin laser terutama fokus pada peningkatan skill programming, mechanical, maintenance dan opeartional mesin laser pada line SMT, untuk menciptakan marking pada PCB yang presisi dan permanen pada berbagai material. 
           Peserta dibekali pengetahuan mendalam mengenai manajemen daya laser, kecepatan grafir, hingga perawatan lensa optik.
         </p>
         <div className={`p-8 rounded-[2rem] border-2 border-dashed ${isDarkMode ? "border-white/10 bg-white/5" : "border-slate-200 bg-slate-50"}`}>
@@ -99,7 +99,7 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
             <li>Troubleshooting Hasil Marking Kurang Tajam</li>
           </ul>
         </div>
-        <p className="italic opacity-70">"Efisiensi produksi dimulai dari operator yang terlatih dengan baik."</p>
+        <p className="italic opacity-70">"Training Laser Machine From Asys Group To make Optimalization SMT Line Production."</p>
 
         <div className="pt-8 border-t border-slate-500/10">
           <p className={`text-xs font-black uppercase tracking-widest mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Kategori Tag:</p>

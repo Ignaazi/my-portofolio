@@ -16,6 +16,17 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 
+ // --- FUNGSI DOWNLOAD CV ---
+  const handleDownloadCV = () => {
+    // Pastikan file PDF ada di folder public/assets/
+    const cvUrl = "/assets/CV-Muhammad ignazi.pdf"; 
+    const link = document.createElement("a");
+    link.href = cvUrl;
+    link.download = "CV_Muhammad_Ignazi.pdf"; // Nama file saat didownload
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 // Import Content dari file yang ada di level yang sama
 import AboutContent from "./about";
 import BlogContent from "./blog-content"; // Import Blog yang baru dibuat
@@ -177,9 +188,11 @@ export default function Home() {
                   <p className={`max-w-2xl font-bold leading-relaxed text-sm md:text-base mb-10  border-l-2 border-orange-500 pl-6 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
                     "I am a <span className={`font-bold not-italic underline decoration-orange-500 underline-offset-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Fullstack Web Developer</span> who has a passion for Technology Development."
                   </p>
-                  <button className="flex items-center gap-3 bg-orange-600 px-8 py-4 rounded-2xl text-sm font-bold text-white hover:bg-orange-500 transition-all shadow-lg shadow-orange-900/40">
-                    <Download size={18} /> Download CV
-                  </button>
+                  <button 
+                  onClick={handleDownloadCV}
+                  className="flex items-center gap-3 bg-orange-600 px-8 py-4 rounded-2xl text-sm font-bold text-white hover:bg-orange-500 transition-all shadow-lg shadow-orange-900/40 active:scale-95">
+                  <Download size={18} /> Download CV
+</button>
                 </div>
                 
             {/* --- SOSIAL MEDIA (FLAT & CLEAN) --- */}
