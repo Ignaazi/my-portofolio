@@ -63,11 +63,11 @@ const DetailView = ({ post, onBack, isDarkMode }: any) => {
         </div>
       </header>
 
-      {/* --- BAGIAN FOTO ABANG --- */}
+  
       <div className="flex justify-center mb-10">
         <div className={`w-full max-w-2xl rounded-[3rem] overflow-hidden border-4 shadow-2xl ${isDarkMode ? 'border-slate-800' : 'border-slate-100'}`}>
           <img 
-            src="/assets/blog2.png" // <-- GANTI NAMA FILE DISINI SESUAI FOTO ABANG DI FOLDER PUBLIC
+            src="/assets/blog2.png" 
             className="w-full h-auto object-cover" 
             alt="Training Laser Marking Assys Group" 
             onError={(e) => {
