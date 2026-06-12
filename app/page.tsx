@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import HomePage from "./components/home-page/page";
+import Footer from "./footer";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 
@@ -41,31 +43,35 @@ export default function Home() {
       />
 
       {/* MAIN CONTAINER WORKSPACE */}
-      <div className={`transition-all duration-300 pt-16 ${
+      <div className={`transition-all duration-300 pt-16 flex flex-col min-h-screen ${
         isSidebarCollapsed ? "md:pl-20" : "md:pl-64"
       }`}>
-        <main className="p-6 md:p-8 max-w-[1600px] mx-auto">
+        {/* Konten Utama Workspace */}
+        <main className="p-6 md:p-8 max-w-[1600px] mx-auto w-full flex-1 flex flex-col gap-6">
           
-          {/* HEADER */}
-          <div className="mb-6">
-            <h1 className={`text-2xl font-bold tracking-tight ${isDarkMode ? "text-white" : "text-[#012970]"}`}>
-              Executive Portfolio Dashboard
-            </h1>
-            <p className="text-xs opacity-60 mt-1 font-medium">
-              Welcome back, Ignazi. Modul aktif saat ini: <span className="text-orange-500 font-bold">{activeTab}</span>
-            </p>
-          </div>
-
-          {/* CANVAS WORKSPACE */}
-          <div className={`p-8 rounded-none border-2 border-dashed text-center min-h-[400px] flex flex-col justify-center items-center transition-colors duration-300 ${
-            isDarkMode ? "border-white/10 bg-[#111c30]/40" : "border-slate-200 bg-white"
-          }`}>
-            <span className="text-xs font-mono uppercase tracking-widest text-orange-500 font-bold">Workspace Canvas</span>
-            <h2 className={`text-lg font-bold mt-2 ${isDarkMode ? "text-white" : "text-slate-800"}`}>Ready to Import `{activeTab}` Module</h2>
-            <p className="text-xs opacity-50 max-w-sm mt-1">Pembagian 2 file komponen terpisah (Navbar & Sidebar) sukses dikonfigurasi secara bersih dari nol.</p>
-          </div>
+          {/* KONDISIONAL RENDER MODULE (LANGSUNG MODUL TANPA HEADER) */}
+          {activeTab === "Home" ? (
+            /* Jika tab aktif adalah Home, langsung render Profile & Skills */
+            <HomePage isDarkMode={isDarkMode} />
+          ) : (
+            /* Jika tab aktif selain Home (About, Project, Blog, Contact) */
+            <div className={`p-8 rounded-2xl border-2 border-dashed text-center min-h-[400px] flex flex-col justify-center items-center transition-colors duration-300 flex-1 ${
+              isDarkMode ? "border-white/10 bg-[#111c30]/40" : "border-slate-200 bg-white"
+            }`}>
+              <span className="text-xs font-mono uppercase tracking-widest text-orange-500 font-bold">Workspace Canvas</span>
+              <h2 className={`text-lg font-bold mt-2 ${isDarkMode ? "text-white" : "text-slate-800"}`}>
+                Ready to Import `{activeTab}` Module
+              </h2>
+              <p className="text-xs opacity-50 max-w-sm mt-1">
+                Komponen untuk halaman {activeTab} siap diintegrasikan di sini.
+              </p>
+            </div>
+          )}
 
         </main>
+
+        {/* COMPONENT 3: BOTTOM FOOTER */}
+        <Footer isDarkMode={isDarkMode} />
       </div>
 
     </div>
