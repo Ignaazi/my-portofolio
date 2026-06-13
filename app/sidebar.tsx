@@ -29,22 +29,27 @@ export default function Sidebar({
     { label: "Contact", tab: "Contact", icon: <Mail size={20} /> }
   ];
 
+  // Mengunci warna border soft premium sesuai gambar image_07ea09.png
+  // Saat mode terang: menggunakan campuran warna dasar NiceAdmin (#cddfff / #e0e9f7)
+  const niceAdminBorder = isDarkMode ? "border-slate-800/80" : "border-[#e0e9f7]";
+
   return (
     <>
-      {/* SIDEBAR CONTAINER */}
+      {/* SIDEBAR CONTAINER - Menggunakan border soft akurat sesuai gambar */}
       <aside className={`fixed top-0 bottom-0 left-0 z-50 border-r transition-all duration-300 flex flex-col justify-between rounded-none ${
         isSidebarCollapsed ? "w-20" : "w-64"
       } ${
-        isDarkMode ? "bg-[#111c30] border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700"
-      } ${
+        isDarkMode ? "bg-[#111c30] text-slate-300" : "bg-white text-slate-700"
+      } ${niceAdminBorder} ${
         isMobileOpen ? "translate-x-0 w-64" : "-translate-x-full md:translate-x-0"
       }`}>
         
+        {/* ==================== BAGIAN ATAS S/D MENU NAVIGASI ==================== */}
         <div className="w-full">
-          {/* ==================== 1. LOGO AREA (PERBATASAN ATAS) ==================== */}
-          <div className={`h-16 flex items-center border-b ${
-            isDarkMode ? "border-white/10" : "border-slate-200"
-          } ${isSidebarCollapsed ? "justify-center" : "px-6 justify-start"}`}>
+          {/* 1. LOGO AREA - Border bawah soft sesuai image_07ea09.png */}
+          <div className={`h-16 flex items-center border-b ${niceAdminBorder} ${
+            isSidebarCollapsed ? "justify-center" : "px-6 justify-start"
+          }`}>
             <span className={`text-base font-black tracking-tight uppercase ${
               isDarkMode ? "text-white" : "text-[#012970]"
             }`}>
@@ -52,13 +57,12 @@ export default function Sidebar({
             </span>
           </div>
 
-          {/* ==================== 2. PROFILE AREA DENGAN LENGKUNGAN ORANYE GRADASI ACCENT ==================== */}
+          {/* 2. PROFILE AREA (GRADASI TETAP h-24) */}
           {!isSidebarCollapsed ? (
             <div className="w-full pb-5 text-center relative">
-              {/* Efek Garis Melengkung Dengan Oranye Gradasi Keren */}
-              <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-orange-500 via-orange-400 to-amber-500 rounded-b-[40px] shadow-xs" />
+              <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-br from-red-600 via-orange-500 to-amber-400 rounded-b-[40px] shadow-sm" />
               
-              {/* Avatar Murni Bulat Polos Tanpa Border Hitam Sesuai Request */}
+              {/* Avatar Murni Bulat Polos Tanpa Border */}
               <div className="relative pt-8 z-10">
                 <div className="w-20 h-20 mx-auto rounded-full overflow-hidden shadow-md">
                   <Image 
@@ -81,8 +85,8 @@ export default function Sidebar({
               </div>
             </div>
           ) : (
-            /* Mini Avatar area saat Collapsed */
-            <div className="w-full py-4 flex justify-center border-b border-dashed border-slate-200 dark:border-white/10">
+            /* Mini Avatar area saat Collapsed - Garis putus-putus soft */
+            <div className={`w-full py-4 flex justify-center border-b border-dashed ${niceAdminBorder}`}>
               <div className="w-9 h-9 rounded-full overflow-hidden relative">
                 <Image 
                   src="/assets/aji.jpg" 
@@ -96,10 +100,10 @@ export default function Sidebar({
             </div>
           )}
 
-          {/* SEPARATOR LINE */}
-          <div className="border-b border-slate-100 dark:border-white/5 w-full mb-4" />
+          {/* GARIS PEMISAH SETELAH PROFILE AREA */}
+          <div className={`border-b w-full mb-4 ${niceAdminBorder}`} />
 
-          {/* ==================== 3. MENU NAVIGASI (HOVER & ACTIVE ORANYE SAMAR) ==================== */}
+          {/* 3. MENU NAVIGASI DENGAN GARIS OREN GELAP DI POJOK KIRI (HOVER & STAY) */}
           <div className="px-3 space-y-2">
             {menuItems.map((item) => {
               const isActive = activeTab === item.tab;
@@ -111,16 +115,16 @@ export default function Sidebar({
                     setIsMobileOpen(false);
                   }}
                   title={item.label}
-                  className={`w-full flex items-center transition-all duration-200 rounded-[12px] ${
+                  className={`w-full flex items-center transition-all duration-200 border-l-4 ${
                     isSidebarCollapsed 
                       ? "justify-center p-3" 
                       : "gap-4 px-4 py-3 text-sm font-bold tracking-wide"
                   } ${
                     isActive 
-                      ? "bg-orange-500/10 text-orange-500 font-extrabold"
+                      ? "bg-orange-500/10 text-orange-500 font-extrabold border-orange-600 rounded-r-[12px]"
                       : isDarkMode
-                        ? "text-slate-400 hover:text-white hover:bg-white/5"
-                        : "text-slate-600 hover:text-orange-500 hover:bg-orange-500/5"
+                        ? "text-slate-400 border-transparent hover:text-white hover:bg-white/5 hover:border-orange-600 hover:rounded-r-[12px]"
+                        : "text-slate-600 border-transparent hover:text-orange-600 hover:bg-orange-500/5 hover:border-orange-600 hover:rounded-r-[12px]"
                   }`}
                 >
                   <div className={isActive ? "text-orange-500" : "text-inherit"}>
@@ -138,38 +142,44 @@ export default function Sidebar({
           </div>
         </div>
 
-        {/* ==================== 4. FOOTER: KOTAK EMAIL PUTIH OVAL (GMAIL LOGO ASLI) ==================== */}
-        <div className="p-3">
-          {!isSidebarCollapsed ? (
-            <div className={`p-3 rounded-[32px] border flex items-center gap-3 transition-colors ${
-              isDarkMode 
-                ? "bg-slate-900 border-white/10" 
-                : "bg-slate-50/60 border-slate-200/80 shadow-xs"
-            }`}>
-              {/* Logo Gmail Berwarna Asli Google */}
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 shadow-2xs border border-slate-100">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22 5.5V18.5C22 19.3284 21.3284 20 20.5 20H18V8.5L12 13L6 8.5V20H3.5C2.67157 20 2 19.3284 2 18.5V5.5C2 4.41438 3.20455 3.84437 4.02426 4.55913L12 11.5L19.9757 4.55913C20.7955 3.84437 22 4.41438 22 5.5Z" fill="#EA4335"/>
-                  <path d="M18 8.5V20H20.5C21.3284 20 22 19.3284 22 18.5V5.5L18 8.5Z" fill="#4285F4"/>
-                  <path d="M6 8.5L2 5.5V18.5C2 19.3284 2.67157 20 3.5 20H6V8.5Z" fill="#34A853"/>
-                  <path d="M19.9757 4.55913L12 11.5L4.02426 4.55913C3.20455 3.84437 2 4.41438 2 5.5V6L12 14.5L22 6V5.5C22 4.41438 20.7955 3.84437 19.9757 4.55913Z" fill="#FBBC05"/>
-                </svg>
+        {/* ==================== 4. FOOTER AREA DENGAN GARIS PEMISAH NICEADMIN ==================== */}
+        <div className="w-full">
+          {/* Garis pembatas sebelum masuk kotak email */}
+          <div className={`border-t w-full mb-3 ${niceAdminBorder}`} />
+          
+          <div className="p-3">
+            {!isSidebarCollapsed ? (
+              /* Kotak luar akun email dengan border soft sesuai image_07ea09.png */
+              <div className={`p-3 rounded-xl border flex items-center gap-3 transition-colors ${niceAdminBorder} ${
+                isDarkMode 
+                  ? "bg-slate-900" 
+                  : "bg-slate-50/60 shadow-[0_1px_3px_rgba(0,0,0,0.01)]"
+              }`}>
+                {/* Kotak Logo Gmail */}
+                <div className={`w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 shadow-xs border p-1.5 ${niceAdminBorder}`}>
+                  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 4H16.6667V8.66667L12 12L7.33333 8.66667V4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H6.66667V10.6667L12 14.6667L17.3333 10.6667V20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4Z" fill="#EA4335"/>
+                    <path d="M22 6V8.66667L17.3333 12.1667V20H20C21.1 20 22 19.1 22 18V6Z" fill="#4285F4"/>
+                    <path d="M2 6V18C2 19.1 2.9 20 4 20H6.66667V12.1667L2 8.66667V6Z" fill="#34A853"/>
+                    <path d="M20 4H4C2.9 4 2 4.9 2 6V6.5L12 14L22 6.5V6C22 4.9 21.1 4 20 4Z" fill="#FBBC05"/>
+                  </svg>
+                </div>
+                <div className="overflow-hidden">
+                  <p className={`text-[10px] font-black truncate ${isDarkMode ? "text-slate-400" : "text-slate-700"}`}>
+                    mhmmdignazi@gmail.com
+                  </p>
+                  <h5 className={`text-[10px] font-black opacity-60 uppercase tracking-wider ${isDarkMode ? "text-white" : "text-slate-500"}`}>
+                    Gmail Account
+                  </h5>
+                </div>
               </div>
-              <div className="overflow-hidden">
-                <p className={`text-[10px] font-black truncate ${isDarkMode ? "text-slate-400" : "text-slate-700"}`}>
-                  mhmmdignazi@gmail.com
-                </p>
-                <h5 className={`text-[10px] font-black opacity-60 uppercase tracking-wider ${isDarkMode ? "text-white" : "text-slate-500"}`}>
-                  Gmail Account
-                </h5>
+            ) : (
+              /* Mini Mail Icon saat Collapsed */
+              <div className="w-full flex justify-center p-2 text-orange-500">
+                <Mail size={18} />
               </div>
-            </div>
-          ) : (
-            /* Mini Mail Icon saat Collapsed */
-            <div className="w-full flex justify-center p-2 text-orange-500">
-              <Mail size={18} />
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
       </aside>

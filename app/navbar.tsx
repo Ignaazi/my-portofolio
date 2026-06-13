@@ -65,10 +65,13 @@ export default function Navbar({
     JP: "プロジェクト、履歴、ユーザーを検索..."
   };
 
+  // Mengunci warna border soft premium NiceAdmin sesuai gambar image_07ea09.png
+  const niceAdminBorder = isDarkMode ? "border-white/10" : "border-[#e0e9f7]";
+
   return (
     <nav className={`fixed top-0 right-0 h-16 z-40 flex items-center justify-between px-6 border-b transition-all duration-300 ${
-      isDarkMode ? "bg-[#111c30] border-white/10 shadow-lg" : "bg-white border-slate-200 shadow-xs"
-    } ${
+      isDarkMode ? "bg-[#111c30] shadow-lg" : "bg-white shadow-xs"
+    } ${niceAdminBorder} ${
       isSidebarCollapsed ? "left-0 md:left-20" : "left-0 md:left-64"
     }`}>
       
@@ -80,9 +83,9 @@ export default function Navbar({
           onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           className={`hidden md:block p-2 rounded-none border-[1px] transition-all active:scale-95 shrink-0 ${
             isDarkMode 
-              ? "text-slate-200 border-white/10 bg-slate-900 hover:border-orange-500" 
-              : "text-slate-800 border-slate-200 bg-white hover:border-orange-500"
-          }`}
+              ? "text-slate-200 bg-slate-900 hover:border-orange-500" 
+              : "text-slate-800 bg-white hover:border-orange-500"
+          } ${niceAdminBorder}`}
         >
           <Menu size={16} className="stroke-[2.5]" />
         </button>
@@ -93,9 +96,9 @@ export default function Navbar({
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           className={`block md:hidden p-2 rounded-none border-[1px] transition-all active:scale-95 shrink-0 ${
             isDarkMode 
-              ? "text-slate-200 border-white/10 bg-slate-900 hover:border-orange-500" 
-              : "text-slate-800 border-slate-200 bg-white hover:border-orange-500"
-          }`}
+              ? "text-slate-200 bg-slate-900 hover:border-orange-500" 
+              : "text-slate-800 bg-white hover:border-orange-500"
+          } ${niceAdminBorder}`}
         >
           <Menu size={16} className="stroke-[2.5]" />
         </button>
@@ -107,9 +110,9 @@ export default function Navbar({
             placeholder={searchPlaceholders[activeLang.code] || searchPlaceholders.ID}
             className={`w-full py-2 pl-3 pr-9 rounded-none border-[1px] text-xs font-bold outline-none transition-all ${
               isDarkMode 
-                ? "bg-slate-900 border-white/10 text-white focus:border-orange-500" 
-                : "bg-white border-slate-200 text-slate-800 focus:border-orange-500"
-            }`}
+                ? "bg-slate-900 text-white focus:border-orange-500" 
+                : "bg-white text-slate-800 focus:border-orange-500"
+            } ${niceAdminBorder}`}
           />
           <Search size={14} className={`absolute right-3 top-1/2 -translate-y-1/2 stroke-[2.5] ${isDarkMode ? "text-slate-400" : "text-slate-800"}`} />
         </div>
@@ -129,14 +132,14 @@ export default function Navbar({
             }}
             className={`flex items-center gap-2 p-1.5 px-2.5 h-9 rounded-none border-[1px] text-xs font-bold uppercase tracking-wider transition-all ${
               isDarkMode 
-                ? "bg-slate-900 border-white/10 text-white hover:border-orange-500" 
-                : "bg-white border-slate-200 text-slate-800 hover:border-orange-500"
-            }`}
+                ? "bg-slate-900 text-white hover:border-orange-500" 
+                : "bg-white text-slate-800 hover:border-orange-500"
+            } ${niceAdminBorder}`}
           >
             <img 
               src={activeLang.flag} 
               alt={activeLang.name} 
-              className="w-4 h-auto object-cover border border-slate-200/40"
+              className={`w-4 h-auto object-cover border ${niceAdminBorder}`}
             />
             <span>{activeLang.code}</span>
             <ChevronDown size={12} className={`transition-transform duration-200 ${isLangOpen ? "rotate-180" : ""}`} />
@@ -144,8 +147,8 @@ export default function Navbar({
 
           {isLangOpen && (
             <div className={`absolute right-0 mt-1 w-36 rounded-none border-[1px] shadow-xl z-50 ${
-              isDarkMode ? "bg-slate-900 border-white/10 text-slate-200" : "bg-white border-slate-200 text-slate-800"
-            }`}>
+              isDarkMode ? "bg-slate-900 text-slate-200" : "bg-white text-slate-800"
+            } ${niceAdminBorder}`}>
               {languages.map((lang) => (
                 <button
                   key={lang.code}
@@ -158,7 +161,7 @@ export default function Navbar({
                     isDarkMode ? "hover:bg-white/5" : "hover:bg-slate-50 hover:text-orange-500"
                   }`}
                 >
-                  <img src={lang.flag} alt={lang.name} className="w-4 h-auto border border-slate-200/50" />
+                  <img src={lang.flag} alt={lang.name} className={`w-4 h-auto border ${niceAdminBorder}`} />
                   <span>{lang.name}</span>
                 </button>
               ))}
@@ -166,7 +169,7 @@ export default function Navbar({
           )}
         </div>
 
-        {/* 2. ICON LONCENG (NOTIFIKASI) - BULAT CERAH & POPUP */}
+        {/* 2. ICON LONCENG (NOTIFIKASI) */}
         <div className="relative">
           <button
             type="button"
@@ -177,13 +180,12 @@ export default function Navbar({
             }}
             className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border-[1px] transition-all ${
               isDarkMode 
-                ? "bg-slate-900 border-white/10 text-slate-200 hover:border-orange-500" 
-                : "text-slate-800 border-slate-200 bg-white hover:border-orange-500"
-            }`}
+                ? "bg-slate-900 text-slate-200 hover:border-orange-500" 
+                : "text-slate-800 bg-white hover:border-orange-500"
+            } ${niceAdminBorder}`}
           >
             <Bell size={16} className="stroke-[2.5]" />
           </button>
-          {/* Lencana Bulat (rounded-full) Warna Merah Pink Cerah, Font Putih Nunito */}
           <span className="absolute -top-1 -right-1 bg-[#ff4d6d] text-white text-[9px] font-sans font-black w-4 h-4 flex items-center justify-center rounded-full border-[1px] border-white dark:border-[#111c30]">
             3
           </span>
@@ -191,13 +193,13 @@ export default function Navbar({
           {/* Popup List Notifikasi */}
           {isNotifOpen && (
             <div className={`absolute right-0 mt-1 w-64 rounded-none border-[1px] shadow-xl z-50 p-2 text-xs font-sans ${
-              isDarkMode ? "bg-slate-900 border-white/10 text-slate-200" : "bg-white border-slate-200 text-slate-800"
-            }`}>
-              <div className="p-1.5 font-black uppercase tracking-wider border-b border-dashed border-slate-200 dark:border-white/10 text-orange-500">
+              isDarkMode ? "bg-slate-900 text-slate-200" : "bg-white text-slate-800"
+            } ${niceAdminBorder}`}>
+              <div className={`p-1.5 font-black uppercase tracking-wider border-b border-dashed text-orange-500 ${niceAdminBorder}`}>
                 Notifications
               </div>
               {notifications.map((n) => (
-                <div key={n.id} className="p-2 border-b last:border-0 border-slate-100 dark:border-white/5 opacity-80 hover:opacity-100">
+                <div key={n.id} className={`p-2 border-b last:border-0 opacity-80 hover:opacity-100 ${isDarkMode ? "border-white/5" : "border-[#e0e9f7]/50"}`}>
                   {n.text}
                 </div>
               ))}
@@ -205,7 +207,7 @@ export default function Navbar({
           )}
         </div>
 
-        {/* 3. ICON PESAN (MAIL) - BULAT CERAH & POPUP */}
+        {/* 3. ICON PESAN (MAIL) */}
         <div className="relative">
           <button
             type="button"
@@ -216,13 +218,12 @@ export default function Navbar({
             }}
             className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border-[1px] transition-all ${
               isDarkMode 
-                ? "bg-slate-900 border-white/10 text-slate-200 hover:border-orange-500" 
-                : "text-slate-800 border-slate-200 bg-white hover:border-orange-500"
-            }`}
+                ? "bg-slate-900 text-slate-200 hover:border-orange-500" 
+                : "text-slate-800 bg-white hover:border-orange-500"
+            } ${niceAdminBorder}`}
           >
             <Mail size={16} className="stroke-[2.5]" />
           </button>
-          {/* Lencana Bulat (rounded-full) Warna Merah Pink Cerah, Font Putih Nunito */}
           <span className="absolute -top-1 -right-1 bg-[#ff4d6d] text-white text-[9px] font-sans font-black w-4 h-4 flex items-center justify-center rounded-full border-[1px] border-white dark:border-[#111c30]">
             2
           </span>
@@ -230,13 +231,13 @@ export default function Navbar({
           {/* Popup List Pesan */}
           {isMessageOpen && (
             <div className={`absolute right-0 mt-1 w-64 rounded-none border-[1px] shadow-xl z-50 p-2 text-xs font-sans ${
-              isDarkMode ? "bg-slate-900 border-white/10 text-slate-200" : "bg-white border-slate-200 text-slate-800"
-            }`}>
-              <div className="p-1.5 font-black uppercase tracking-wider border-b border-dashed border-slate-200 dark:border-white/10 text-orange-500">
+              isDarkMode ? "bg-slate-900 text-slate-200" : "bg-white text-slate-800"
+            } ${niceAdminBorder}`}>
+              <div className={`p-1.5 font-black uppercase tracking-wider border-b border-dashed text-orange-500 ${niceAdminBorder}`}>
                 Messages
               </div>
               {messages.map((m) => (
-                <div key={m.id} className="p-2 border-b last:border-0 border-slate-100 dark:border-white/5">
+                <div key={m.id} className={`p-2 border-b last:border-0 ${isDarkMode ? "border-white/5" : "border-[#e0e9f7]/50"}`}>
                   <div className="font-bold text-blue-500">{m.from}</div>
                   <div className="opacity-80 text-[11px]">{m.text}</div>
                 </div>
@@ -251,14 +252,14 @@ export default function Navbar({
           onClick={() => setIsDarkMode(!isDarkMode)}
           className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border-[1px] transition-all active:scale-95 ${
             isDarkMode 
-              ? "bg-slate-900 border-white/10 text-yellow-400 hover:border-orange-500" 
-              : "bg-white border-slate-200 text-slate-800 hover:border-orange-500"
-          }`}
+              ? "bg-slate-900 text-yellow-400 hover:border-orange-500" 
+              : "bg-white text-slate-800 hover:border-orange-500"
+          } ${niceAdminBorder}`}
         >
           {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
         </button>
 
-        {/* ==================== 5. AVATAR FOTO PROFIL (TULISAN APUS) ==================== */}
+        {/* ==================== 5. AVATAR FOTO PROFIL ==================== */}
         <div className="flex items-center pl-1 shrink-0">
           <div className="w-8 h-8 rounded-full bg-slate-100 border-[1px] border-orange-500 overflow-hidden relative shadow-xs">
             <Image

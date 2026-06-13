@@ -14,6 +14,9 @@ export default function Home() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
+  // Mengunci warna border soft premium NiceAdmin sesuai gambar image_07ea09.png
+  const niceAdminBorder = isDarkMode ? "border-white/10" : "border-[#e0e9f7]";
+
   return (
     <div 
       className={`min-h-screen transition-colors duration-300 ${
@@ -54,10 +57,10 @@ export default function Home() {
             /* Jika tab aktif adalah Home, langsung render Profile & Skills */
             <HomePage isDarkMode={isDarkMode} />
           ) : (
-            /* Jika tab aktif selain Home (About, Project, Blog, Contact) */
+            /* Jika tab aktif selain Home (About, Project, Blog, Contact) - Menggunakan border NiceAdmin */
             <div className={`p-8 rounded-2xl border-2 border-dashed text-center min-h-[400px] flex flex-col justify-center items-center transition-colors duration-300 flex-1 ${
-              isDarkMode ? "border-white/10 bg-[#111c30]/40" : "border-slate-200 bg-white"
-            }`}>
+              isDarkMode ? "bg-[#111c30]/40" : "bg-white"
+            } ${niceAdminBorder}`}>
               <span className="text-xs font-mono uppercase tracking-widest text-orange-500 font-bold">Workspace Canvas</span>
               <h2 className={`text-lg font-bold mt-2 ${isDarkMode ? "text-white" : "text-slate-800"}`}>
                 Ready to Import `{activeTab}` Module
