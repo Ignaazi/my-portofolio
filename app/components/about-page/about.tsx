@@ -42,8 +42,15 @@ export default function AboutPage({ isDarkMode }: AboutPageProps) {
         </p>
       </div>
 
+      {/* ==================== PEMBATAS & JUDUL SUB-SECTION (DITENGAH) ==================== */}
+      <div className={`flex flex-col items-center justify-center border-t pt-6 mt-4 ${niceAdminBorder}`}>
+        <h2 className={`text-2xl md:text-3xl font-black tracking-tight text-center ${textTitleColor}`}>
+          Education & Experience
+        </h2>
+      </div>
+
       {/* ==================== 3. GRID KOTAK EDUCATION & EXPERIENCE ==================== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full text-left items-start mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full text-left items-start">
         
         {/* ==================== KOTAK KIRI: EDUCATION ==================== */}
         <div className={`p-5 rounded-2xl border flex flex-col justify-between min-h-[260px] ${niceAdminBgCard} ${niceAdminBorder}`}>
