@@ -112,122 +112,118 @@ export default function AboutPage({ isDarkMode }: AboutPageProps) {
           </div>
         </div>
 
-        {/* ==================== KOTAK KANAN: EXPERIENCE ==================== */}
-        <div className={`p-5 rounded-2xl border flex flex-col justify-between min-h-[260px] ${niceAdminBgCard} ${niceAdminBorder}`}>
-          <div>
-            <h3 className={`text-base font-black tracking-tight mb-5 ${textTitleColor}`}>
-              Experience
-            </h3>
-            
-            <div className="flex items-stretch gap-3 w-full relative">
+      {/* ==================== KOTAK KANAN: EXPERIENCE ==================== */}
+<div className={`p-5 rounded-2xl border flex flex-col justify-between min-h-[260px] ${niceAdminBgCard} ${niceAdminBorder}`}>
+  <div>
+    <h3 className={`text-base font-black tracking-tight mb-5 ${textTitleColor}`}>
+      Experience
+    </h3>
+    
+    <div className="flex items-stretch gap-3 w-full relative">
+      
+      {/* KOLOM KIRI: KHUSUS LOGO & LINIMASA */}
+      <div className="flex flex-col items-center shrink-0 pt-[2px]">
+        {/* Logo 1: PT SIIX */}
+        <div className={`w-12 h-12 rounded-xl border bg-white flex items-center justify-center overflow-hidden p-1 z-10 ${niceAdminBorder}`}>
+          <Image 
+            src="/assets/siix.png" 
+            alt="PT SIIX Logo" 
+            width={40} 
+            height={40} 
+            className="object-contain w-full h-full"
+            unoptimized
+          />
+        </div>
+
+        {/* Garis Penghubung Dinamis */}
+        {showMoreExp ? (
+          <div className="flex-1 flex flex-col items-center justify-between w-full my-1 pointer-events-none">
+            <div className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0" />
+            <div className="flex-1 w-[2px] bg-slate-300 dark:bg-slate-600" />
+            <div className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0" />
+          </div>
+        ) : (
+          <div className="flex-1 min-h-[16px]" />
+        )}
+
+        {/* Logo 2: Samindo Electronics */}
+        {showMoreExp && (
+          <div className={`w-12 h-12 rounded-xl border bg-white flex items-center justify-center overflow-hidden p-1 z-10 animate-fade-in ${niceAdminBorder}`}>
+            <Image 
+              src="/assets/smd.png" 
+              alt="Samindo Electronics Logo" 
+              width={40} 
+              height={40} 
+              className="object-contain w-full h-full"
+              unoptimized
+            />
+          </div>
+        )}
+      </div>
+
+      {/* KOLOM KANAN: KONTEN TEKS DESKRIPSI */}
+      <div className="flex flex-col flex-1 justify-between gap-4">
+        
+        {/* KONTEN PT SIIX */}
+        <div className="flex flex-col">
+          <h4 className={`text-sm font-bold leading-snug ${isDarkMode ? "text-white" : "text-slate-800"}`}>
+            PT. SIIX ELECTRONICS INDONESIA
+          </h4>
+          <p className="text-xs text-orange-500 font-bold">SMT PROGRAMMER</p>
+          <p className="text-[11px] text-slate-400 font-semibold mb-1">Sep 2024 - Present · 1 yr 10 mos</p>
+          
+          <div className={`text-[11px] md:text-xs font-medium leading-relaxed ${textBodyColor}`}>
+            <span className={showMoreExp ? "" : "line-clamp-3 inline"}>
+              - Create program pick and place machine mounter and printing machine
+              - Prepare and monitoring for pre-production (new model, range, line, ECR) based on BOM list and engineering drawing
+              - Create report setup parameter machine, take data from trial, support audit customer
+              - Create program and operations for PANASONIC (CM, NPM, SP60, SP70, SPG), FUJI, ANDA, KEYENCE, ASYS, YAMAHA
               
-              {/* KOLOM KIRI: KHUSUS LOGO & LINIMASA */}
-              <div className="flex flex-col items-center shrink-0 pt-[2px]">
-                {/* Logo 1: PT SIIX */}
-                <div className={`w-12 h-12 rounded-xl border bg-white flex items-center justify-center overflow-hidden p-1 z-10 ${niceAdminBorder}`}>
-                  <Image 
-                    src="/assets/siix.png" 
-                    alt="PT SIIX Logo" 
-                    width={40} 
-                    height={40} 
-                    className="object-contain w-full h-full"
-                    unoptimized
-                  />
-                </div>
-
-                {/* Garis Penghubung Dinamis Bersih Tanpa Buntut */}
-                {showMoreExp ? (
-                  <div className="flex-1 flex flex-col items-center justify-between w-full my-1 pointer-events-none">
-                    {/* Bulat Atas Pas di Luar Kotak SIIX */}
-                    <div className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0" />
-                    {/* Garis ditarik di antara bulatan tanpa melewati ujung bulatan */}
-                    <div className="flex-1 w-[2px] bg-slate-300 dark:bg-slate-600" />
-                    {/* Bulat Bawah Pas di Atas Kotak Amindo */}
-                    <div className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0" />
-                  </div>
-                ) : (
-                  <div className="flex-1 min-h-[16px]" />
-                )}
-
-                {/* Logo 2: Amindo Electronics */}
-                {showMoreExp && (
-                  <div className={`w-12 h-12 rounded-xl border bg-white flex items-center justify-center overflow-hidden p-1 z-10 animate-fade-in ${niceAdminBorder}`}>
-                    <Image 
-                      src="/assets/smd.png" 
-                      alt="Amindo Electronics Logo" 
-                      width={40} 
-                      height={40} 
-                      className="object-contain w-full h-full"
-                      unoptimized
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* KOLOM KANAN: KONTEN TEKS DESKRIPSI */}
-              <div className="flex flex-col flex-1 justify-between gap-4">
-                
-                {/* KONTEN PT SIIX */}
-                <div className="flex flex-col">
-                  <h4 className={`text-sm font-bold leading-snug ${isDarkMode ? "text-white" : "text-slate-800"}`}>
-                    PT SIIX
-                  </h4>
-                  <p className="text-xs text-orange-500 font-bold">
-                    Programmer SMT
-                  </p>
-                  <p className="text-[11px] text-slate-400 font-semibold mb-1">
-                    Jan 2026 - Jan 2027 · 1 thn
-                  </p>
-                  
-                  <div className={`text-[11px] md:text-xs font-medium leading-relaxed ${textBodyColor}`}>
-                    <span className={showMoreExp ? "" : "line-clamp-3 inline"}>
-                      - Mengembangkan, mengoptimasi, dan mereplikasi sistem digital berskala industri canggih. Mempermudah operasional lini produksi di lantai pabrik menggunakan integrasi scanner barcode, tracking inventory, serta otomatisasi report material control untuk efisiensi menyeluruh.
-                      
-                      {!showMoreExp && (
-                        <button 
-                          onClick={() => setShowMoreExp(true)}
-                          className="font-bold ml-1 text-slate-500 dark:text-slate-400 hover:underline inline text-[11px]"
-                        >
-                          ...Selengkapnya
-                        </button>
-                      )}
-                    </span>
-                  </div>
-                </div>
-
-                {/* KONTEN AMINDO ELECTRONICS */}
-                {showMoreExp && (
-                  <div className="flex flex-col animate-fade-in pt-1 pb-[2px]">
-                    <h4 className={`text-sm font-bold leading-snug ${isDarkMode ? "text-white" : "text-slate-800"}`}>
-                      Amindo Electronics
-                    </h4>
-                    <p className="text-xs text-orange-500 font-bold">
-                      Operator / Technician
-                    </p>
-                    <p className="text-[11px] text-slate-400 font-semibold mb-1">
-                      Jan 2022 - Des 2025 · 4 thn
-                    </p>
-                    
-                    <div className={`text-[11px] md:text-xs font-medium leading-relaxed ${textBodyColor}`}>
-                      <span className="inline">
-                        - Menjadi bagian dari tim operasional manufaktur elektronik dasar. Mempelajari alur kerja mesin SMT, melakukan analisis penanganan defect, mendata material, serta mengidentifikasi celah otomatisasi sistem manajemen produksi.
-                        
-                        <button 
-                          onClick={() => setShowMoreExp(false)}
-                          className="font-bold ml-1 text-slate-400 dark:text-slate-500 hover:underline inline text-[11px]"
-                        >
-                          ...Sembunyikan
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-              </div>
-
-            </div>
+              {!showMoreExp && (
+                <button 
+                  onClick={() => setShowMoreExp(true)}
+                  className="font-bold ml-1 text-slate-500 dark:text-slate-400 hover:underline inline text-[11px]"
+                >
+                  ...Selengkapnya
+                </button>
+              )}
+            </span>
           </div>
         </div>
+
+        {/* KONTEN SAMINDO & MATERIALS CONTROL */}
+        {showMoreExp && (
+          <div className="flex flex-col animate-fade-in pt-1 pb-[2px]">
+            <h4 className={`text-sm font-bold leading-snug ${isDarkMode ? "text-white" : "text-slate-800"}`}>
+              Samindo Electronics
+            </h4>
+            <p className="text-xs text-orange-500 font-bold">SMT PROGRAMMER</p>
+            <p className="text-[11px] text-slate-400 font-semibold mb-1">Dec 2022 - Jun 2024 · 1 yr 7 mos</p>
+            <div className={`text-[11px] md:text-xs font-medium leading-relaxed ${textBodyColor} mb-3`}>
+              - Document preparation (BOM, GERBER, CAD DATA, FEEDER, LOADING LIST), coordinate with R&D, and monitoring production line (CPH, LOB, CA)
+              - ERP/SAP operation, inventory control, and electronics repair using soldering
+            </div>
+
+            <h4 className={`text-sm font-bold leading-snug ${isDarkMode ? "text-white" : "text-slate-800"}`}>
+              MATERIALS CONTROL (Self-employed)
+            </h4>
+            <p className="text-[11px] text-slate-400 font-semibold mb-1">Jun 2022 - Dec 2022 · 7 mos</p>
+            <div className={`text-[11px] md:text-xs font-medium leading-relaxed ${textBodyColor}`}>
+              - Processing materials data, planning, and update planning for materials needs
+              - Materials management, FIFO control, inventory control, and forklift/warehouse tool operation
+              <button 
+                onClick={() => setShowMoreExp(false)}
+                className="font-bold ml-1 text-slate-400 dark:text-slate-500 hover:underline inline text-[11px]"
+              >
+                ...Sembunyikan
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
 
       </div>
 
