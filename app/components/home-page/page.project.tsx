@@ -15,14 +15,42 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
 
   const myRealProjects = [
     {
-      title: "Readymixnh",
-      description: "Platform jasa pengecoran beton",
+      title: "Readymixnh.com",
+      description: "Platform website landing page untuk jasa pengecoran beton dan penyewaan alat jasa pompa cor se jabodetabek by nahuldi ",
       image: "assets/project1.png",
       previewLink: "https://readymixnh.com/",
       techIcons: [
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"
+      ]
+    },
+    {
+      title: "System Sparepart Management",
+      description: "Website local server system sparepart management perusahaan manufacture dalam menjaga proses penyimpanan dan memonitoring proses in/out sparepart",
+      image: "assets/project2.png",
+      techIcons: [
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg",
+        "https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"
+      ]
+    },
+    {
+      title: "PT.SIIX Inventory Sparepart",
+      description: "System inventory sparepart control use consept ERP 3 Module Warehouse, Production, Costing and implement MRP, FIFO, Tracebility data, Analytz data For monitoring and maintaine sparepart machine ",
+      image: "assets/project3.png", // Silakan ganti link/path foto ketiga disini jika diperlukan
+      previewLink: "https://readymixnh.com/",
+      techIcons: [
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"
       ]
     }
@@ -56,7 +84,7 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
               />
             </div>
 
-            {/* Bagian Putih/Konten Bawah: Ditambah padding vertikal (pt-6) dan gap-6 agar lebih panjang ke bawah */}
+            {/* Bagian Konten Bawah (Semua dicopas sama persis sesuai Readymixnh) */}
             <div className="px-5 pt-6 flex flex-col flex-1 justify-between gap-6">
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-2">
@@ -66,7 +94,7 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
                     {project.title}
                   </h3>
                   
-                  {/* Badge Star - Diubah sedikit lebih kotak dengan rounded-sm */}
+                  {/* Badge Star */}
                   <div className={`flex items-center gap-0.5 px-1.5 py-0.5 rounded-sm text-[10px] font-bold tracking-wide shrink-0 ${
                     isDarkMode ? "bg-white/5 text-amber-400 border border-white/10" : "bg-amber-50 text-amber-600 border border-amber-200"
                   }`}>
@@ -92,9 +120,9 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
                 </div>
               </div>
 
-              {/* Jarak antar elemen footer diperlebar (space-y-5) agar card memanjang kebawah */}
+              {/* Bagian Footer Bahasa & Tombol Preview */}
               <div className="space-y-5 pt-1">
-                {/* Logo bahasa pemrograman - Kotak rounded-lg */}
+                {/* Logo bahasa pemrograman */}
                 <div className="flex flex-wrap gap-2">
                   {project.techIcons.map((iconUrl, idx) => (
                     <div
@@ -108,7 +136,7 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
                   ))}
                 </div>
 
-                {/* Tombol Preview - Diubah menjadi rounded (lebih kotak tapi tidak full lancip) */}
+                {/* Tombol Preview */}
                 <div className="pt-1">
                   <a
                     href={project.previewLink}
