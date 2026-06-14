@@ -17,7 +17,7 @@ export default function Home() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   // Mengunci warna border soft premium NiceAdmin
-  const niceAdminBorder = isDarkMode ? "border-white/10" : "border-[#e0e9f7]"
+  const niceAdminBorder = isDarkMode ? "border-white/10" : "border-[#e0e9f7]";
 
   return (
     <div 
@@ -27,7 +27,7 @@ export default function Home() {
       style={{ fontFamily: "var(--font-nunito), sans-serif" }}
     >
       
-      {/* 1. TOP NAVBAR */}
+      {/* 1. TOP NAVBAR - Bebas dari props bahasa karena sudah menggunakan global context */}
       <Navbar 
         isDarkMode={isDarkMode} 
         setIsDarkMode={setIsDarkMode} 

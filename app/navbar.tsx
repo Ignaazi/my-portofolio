@@ -2,7 +2,7 @@
 
 import { Bell, ChevronDown, Mail, Menu, Moon, Search, Sun } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -25,7 +25,7 @@ export default function Navbar({
   currentLang,
   setCurrentLang
 }: NavbarProps) {
-  
+
   // State cadangan lokal jika di parent belum didefinisikan
   const [localLang, setLocalLang] = useState({
     code: "ID",
@@ -41,11 +41,61 @@ export default function Navbar({
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
 
+  // Ditambahkan properti googleCode agar klop dengan skrip Google Translate di layout
   const languages = [
-    { code: "ID", name: "Indonesia", flag: "https://flagcdn.com/w40/id.png" },
-    { code: "EN", name: "English", flag: "https://flagcdn.com/w40/us.png" },
-    { code: "JP", name: "Japan", flag: "https://flagcdn.com/w40/jp.png" }
+    { code: "ID", name: "Indonesia", flag: "https://flagcdn.com/w40/id.png", googleCode: "id" },
+    { code: "EN", name: "English", flag: "https://flagcdn.com/w40/us.png", googleCode: "en" },
+    { code: "JP", name: "Japan", flag: "https://flagcdn.com/w40/jp.png", googleCode: "ja" }
   ];
+
+  // Efek untuk membaca bahasa aktif dari Cookie Google saat web pertama kali dibuka
+  useEffect(() => {
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+    };
+
+    const googTrans = getCookie('googtrans');
+    if (googTrans) {
+      const langTarget = googTrans.split('/').pop()?.toUpperCase();
+      const matchedLang = languages.find(l => l.code === langTarget);
+      if (matchedLang) {
+        handleLangChange({ code: matchedLang.code, name: matchedLang.name, flag: matchedLang.flag });
+      }
+    }
+  }, []);
+
+  // FUNGSI AUTO-TRANSLATE GLOBAL (Sistem Paksa Cookie + DOM Trigger)
+  const triggerGoogleTranslate = (langCode: string) => {
+    // 1. Atur Cookie Google Translate secara manual agar Next.js membacanya secara permanen
+    const domain = window.location.hostname === "localhost" ? "" : `; domain=.${window.location.hostname}`;
+    document.cookie = `googtrans=/id/${langCode}; path=/${domain}`;
+    document.cookie = `googtrans=/id/${langCode}; path=/`;
+
+    // 2. Cari elemen dropdown tersembunyi milik Google dan jalankan event change
+    let attempts = 0;
+    const runTranslate = () => {
+      const selectEl = document.querySelector(".goog-te-combo") as HTMLSelectElement;
+      if (selectEl) {
+        selectEl.value = langCode;
+        selectEl.dispatchEvent(new Event("change"));
+        
+        // Sengaja di-reload kilat agar Next.js me-render ulang seluruh teks statis/dinamis dari server-side ke bahasa baru
+        setTimeout(() => {
+          window.location.reload();
+        }, 150);
+      } else if (attempts < 10) {
+        attempts++;
+        setTimeout(runTranslate, 200);
+      } else {
+        // Jika element drop-down terhambat, reload paksa agar cookie baru langsung bekerja mandiri
+        window.location.reload();
+      }
+    };
+
+    runTranslate();
+  };
 
   // Dummy data untuk popup
   const notifications = [
@@ -65,7 +115,6 @@ export default function Navbar({
     JP: "プロジェクト、履歴、ユーザーを検索..."
   };
 
-  // Mengunci warna border soft premium NiceAdmin sesuai gambar image_07ea09.png
   const niceAdminBorder = isDarkMode ? "border-white/10" : "border-[#e0e9f7]";
 
   return (
@@ -81,10 +130,8 @@ export default function Navbar({
         <button 
           type="button"
           onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-          className={`hidden md:block p-2 rounded-none border-[1px] transition-all active:scale-95 shrink-0 ${
-            isDarkMode 
-              ? "text-slate-200 bg-slate-900 hover:border-orange-500" 
-              : "text-slate-800 bg-white hover:border-orange-500"
+          className={`hidden md:block p-2 rounded-none border transition-all active:scale-95 shrink-0 ${
+            isDarkMode ? "text-slate-200 bg-slate-900 hover:border-orange-500" : "text-slate-800 bg-white hover:border-orange-500"
           } ${niceAdminBorder}`}
         >
           <Menu size={16} className="stroke-[2.5]" />
@@ -94,10 +141,8 @@ export default function Navbar({
         <button 
           type="button"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className={`block md:hidden p-2 rounded-none border-[1px] transition-all active:scale-95 shrink-0 ${
-            isDarkMode 
-              ? "text-slate-200 bg-slate-900 hover:border-orange-500" 
-              : "text-slate-800 bg-white hover:border-orange-500"
+          className={`block md:hidden p-2 rounded-none border transition-all active:scale-95 shrink-0 ${
+            isDarkMode ? "text-slate-200 bg-slate-900 hover:border-orange-500" : "text-slate-800 bg-white hover:border-orange-500"
           } ${niceAdminBorder}`}
         >
           <Menu size={16} className="stroke-[2.5]" />
@@ -108,10 +153,8 @@ export default function Navbar({
           <input 
             type="text" 
             placeholder={searchPlaceholders[activeLang.code] || searchPlaceholders.ID}
-            className={`w-full py-2 pl-3 pr-9 rounded-none border-[1px] text-xs font-bold outline-none transition-all ${
-              isDarkMode 
-                ? "bg-slate-900 text-white focus:border-orange-500" 
-                : "bg-white text-slate-800 focus:border-orange-500"
+            className={`w-full py-2 pl-3 pr-9 rounded-none border text-xs font-bold outline-none transition-all ${
+              isDarkMode ? "bg-slate-900 text-white focus:border-orange-500" : "bg-white text-slate-800 focus:border-orange-500"
             } ${niceAdminBorder}`}
           />
           <Search size={14} className={`absolute right-3 top-1/2 -translate-y-1/2 stroke-[2.5] ${isDarkMode ? "text-slate-400" : "text-slate-800"}`} />
@@ -130,10 +173,8 @@ export default function Navbar({
               setIsNotifOpen(false);
               setIsMessageOpen(false);
             }}
-            className={`flex items-center gap-2 p-1.5 px-2.5 h-9 rounded-none border-[1px] text-xs font-bold uppercase tracking-wider transition-all ${
-              isDarkMode 
-                ? "bg-slate-900 text-white hover:border-orange-500" 
-                : "bg-white text-slate-800 hover:border-orange-500"
+            className={`flex items-center gap-2 p-1.5 px-2.5 h-9 rounded-none border text-xs font-bold uppercase tracking-wider transition-all ${
+              isDarkMode ? "bg-slate-900 text-white hover:border-orange-500" : "bg-white text-slate-800 hover:border-orange-500"
             } ${niceAdminBorder}`}
           >
             <img 
@@ -146,7 +187,7 @@ export default function Navbar({
           </button>
 
           {isLangOpen && (
-            <div className={`absolute right-0 mt-1 w-36 rounded-none border-[1px] shadow-xl z-50 ${
+            <div className={`absolute right-0 mt-1 w-36 rounded-none border shadow-xl z-50 ${
               isDarkMode ? "bg-slate-900 text-slate-200" : "bg-white text-slate-800"
             } ${niceAdminBorder}`}>
               {languages.map((lang) => (
@@ -154,7 +195,8 @@ export default function Navbar({
                   key={lang.code}
                   type="button"
                   onClick={() => {
-                    handleLangChange(lang);
+                    handleLangChange({ code: lang.code, name: lang.name, flag: lang.flag }); 
+                    triggerGoogleTranslate(lang.googleCode); 
                     setIsLangOpen(false);
                   }}
                   className={`w-full flex items-center gap-3 px-3 py-2 text-left text-xs font-bold transition-colors ${
@@ -173,26 +215,19 @@ export default function Navbar({
         <div className="relative">
           <button
             type="button"
-            onClick={() => {
-              setIsNotifOpen(!isNotifOpen);
-              setIsLangOpen(false);
-              setIsMessageOpen(false);
-            }}
-            className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border-[1px] transition-all ${
-              isDarkMode 
-                ? "bg-slate-900 text-slate-200 hover:border-orange-500" 
-                : "text-slate-800 bg-white hover:border-orange-500"
+            onClick={() => { setIsNotifOpen(!isNotifOpen); setIsLangOpen(false); setIsMessageOpen(false); }}
+            className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border transition-all ${
+              isDarkMode ? "bg-slate-900 text-slate-200 hover:border-orange-500" : "text-slate-800 bg-white hover:border-orange-500"
             } ${niceAdminBorder}`}
           >
             <Bell size={16} className="stroke-[2.5]" />
           </button>
-          <span className="absolute -top-1 -right-1 bg-[#ff4d6d] text-white text-[9px] font-sans font-black w-4 h-4 flex items-center justify-center rounded-full border-[1px] border-white dark:border-[#111c30]">
+          <span className="absolute -top-1 -right-1 bg-[#ff4d6d] text-white text-[9px] font-sans font-black w-4 h-4 flex items-center justify-center rounded-full border border-white dark:border-[#111c30]">
             3
           </span>
 
-          {/* Popup List Notifikasi */}
           {isNotifOpen && (
-            <div className={`absolute right-0 mt-1 w-64 rounded-none border-[1px] shadow-xl z-50 p-2 text-xs font-sans ${
+            <div className={`absolute right-0 mt-1 w-64 rounded-none border shadow-xl z-50 p-2 text-xs font-sans ${
               isDarkMode ? "bg-slate-900 text-slate-200" : "bg-white text-slate-800"
             } ${niceAdminBorder}`}>
               <div className={`p-1.5 font-black uppercase tracking-wider border-b border-dashed text-orange-500 ${niceAdminBorder}`}>
@@ -211,26 +246,19 @@ export default function Navbar({
         <div className="relative">
           <button
             type="button"
-            onClick={() => {
-              setIsMessageOpen(!isMessageOpen);
-              setIsLangOpen(false);
-              setIsNotifOpen(false);
-            }}
-            className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border-[1px] transition-all ${
-              isDarkMode 
-                ? "bg-slate-900 text-slate-200 hover:border-orange-500" 
-                : "text-slate-800 bg-white hover:border-orange-500"
+            onClick={() => { setIsMessageOpen(!isMessageOpen); setIsLangOpen(false); setIsNotifOpen(false); }}
+            className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border transition-all ${
+              isDarkMode ? "bg-slate-900 text-slate-200 hover:border-orange-500" : "text-slate-800 bg-white hover:border-orange-500"
             } ${niceAdminBorder}`}
           >
             <Mail size={16} className="stroke-[2.5]" />
           </button>
-          <span className="absolute -top-1 -right-1 bg-[#ff4d6d] text-white text-[9px] font-sans font-black w-4 h-4 flex items-center justify-center rounded-full border-[1px] border-white dark:border-[#111c30]">
+          <span className="absolute -top-1 -right-1 bg-[#ff4d6d] text-white text-[9px] font-sans font-black w-4 h-4 flex items-center justify-center rounded-full border border-white dark:border-[#111c30]">
             2
           </span>
 
-          {/* Popup List Pesan */}
           {isMessageOpen && (
-            <div className={`absolute right-0 mt-1 w-64 rounded-none border-[1px] shadow-xl z-50 p-2 text-xs font-sans ${
+            <div className={`absolute right-0 mt-1 w-64 rounded-none border shadow-xl z-50 p-2 text-xs font-sans ${
               isDarkMode ? "bg-slate-900 text-slate-200" : "bg-white text-slate-800"
             } ${niceAdminBorder}`}>
               <div className={`p-1.5 font-black uppercase tracking-wider border-b border-dashed text-orange-500 ${niceAdminBorder}`}>
@@ -250,18 +278,16 @@ export default function Navbar({
         <button
           type="button"
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border-[1px] transition-all active:scale-95 ${
-            isDarkMode 
-              ? "bg-slate-900 text-yellow-400 hover:border-orange-500" 
-              : "bg-white text-slate-800 hover:border-orange-500"
+          className={`p-2 h-9 w-9 flex items-center justify-center rounded-none border transition-all active:scale-95 ${
+            isDarkMode ? "bg-slate-900 text-yellow-400 hover:border-orange-500" : "bg-white text-slate-800 hover:border-orange-500"
           } ${niceAdminBorder}`}
         >
           {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
         </button>
 
-        {/* ==================== 5. AVATAR FOTO PROFIL ==================== */}
+        {/* 5. AVATAR FOTO PROFIL */}
         <div className="flex items-center pl-1 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-slate-100 border-[1px] border-orange-500 overflow-hidden relative shadow-xs">
+          <div className="w-8 h-8 rounded-full bg-slate-100 border border-orange-500 overflow-hidden relative shadow-xs">
             <Image
               src="/assets/aji.jpg"
               alt="M. Ignazi"

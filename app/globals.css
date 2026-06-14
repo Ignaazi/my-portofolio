@@ -23,4 +23,36 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* Tambahan agar tidak ada pergeseran saat google translate aktif */
+  top: 0 !important;
+  position: static !important;
+}
+
+/* ==========================================================================
+   KUNCI TOTAL GOOGLE TRANSLATE (ANTI-RESET & PREMIUM CLEAN LOOK)
+   ========================================================================== */
+
+/* 1. Sembunyikan total banner atas Google Translate beserta tombol close-nya */
+.skiptranslate,
+.goog-te-banner-frame,
+#goog-te-tt,
+.goog-te-balloon-frame,
+#google_translate_element {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 2. Matikan highlight biru/kuning dan tooltip popup saat kursor diarahkan ke teks */
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  display: inline !important;
+}
+
+/* 3. Bersihkan sisa ruang iframe Google yang sering bocor di latar belakang */
+iframe.goog-te-banner-frame {
+  display: none !important;
 }
