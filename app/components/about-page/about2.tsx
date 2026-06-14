@@ -54,7 +54,7 @@ export default function About2Page({ isDarkMode }: About2PageProps) {
       {/* ==================== 1. JUDUL UTAMA ==================== */}
       <div className={`flex flex-col items-center justify-center border-t pt-4 ${navbarBorderColor}`}>
         <h1 className={`text-3xl md:text-4xl font-black tracking-tight text-center ${textTitleColor}`}>
-          Social & Activity
+          Github Activity
         </h1>
       </div>
 
