@@ -59,6 +59,18 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"
       ]
+    },
+    {
+      title: "KKN Desa Panyindangan",
+      description: "Platform website informasi dan dokumentasi program kerja serta pelaksanaan kegiatan Kuliah Kerja Nyata (KKN) mahasiswa di Desa Panyindangan.",
+      image: "assets/project5.png",
+      previewLink: "https://kkn-panyindangan.vercel.app/",
+      techIcons: [
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+      ]
     }
   ];
 
@@ -173,7 +185,7 @@ export default function BestProjectPage({ isDarkMode }: ProjectPageProps) {
                         Preview
                       </button>
                     ) : (
-                      // Project 1 (Readymixnh): Tetap mempertahankan fungsi link tautan luar bawaan Anda
+                      // Project 1 & Proyek Baru: Mempertahankan fungsi link tautan luar bawaan Anda
                       <a
                         href={project.previewLink}
                         target="_blank"
